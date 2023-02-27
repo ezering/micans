@@ -87,7 +87,7 @@ class MicansColors {
   static const Color white = Color.fromRGBO(255, 255, 255, 1);
 
 // $Material Color
-  MaterialColor createMaterialColor(Color color) {
+  static MaterialColor createMaterialColor(Color color) {
     List strengths = <double>[.05];
     Map<int, Color> swatch = {};
     final int r = color.red, g = color.green, b = color.blue;
