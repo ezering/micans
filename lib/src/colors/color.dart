@@ -56,7 +56,7 @@ class MicansColors {
   static const Color yellow_60 = Color(0x00b26205);
   static const Color yellow_70 = Color(0x00824b0d);
   static const Color yellow_80 = Color(0x00663c0c);
-  static Color yellow_90 = HexColor.fromHex('#004d2b05');
+  static const Color yellow_90 = Color(0x004d2b05);
   static const Color yellow_100 = Color(0x00331c03);
 
 // $red
@@ -87,21 +87,4 @@ class MicansColors {
 // $white
   //static const Color white = Color(0x00ffffff);
   static const Color white = Colors.red;
-}
-
-extension HexColor on Color {
-  /// String is in the format "aabbcc" or "ffaabbcc" with an optional leading "#".
-  static Color fromHex(String hexString) {
-    final buffer = StringBuffer();
-    if (hexString.length == 6 || hexString.length == 7) buffer.write('ff');
-    buffer.write(hexString.replaceFirst('#', ''));
-    return Color(int.parse(buffer.toString(), radix: 16));
-  }
-
-  /// Prefixes a hash sign if [leadingHashSign] is set to `true` (default is `true`).
-  String toHex({bool leadingHashSign = true}) => '${leadingHashSign ? '#' : ''}'
-      '${alpha.toRadixString(16).padLeft(2, '0')}'
-      '${red.toRadixString(16).padLeft(2, '0')}'
-      '${green.toRadixString(16).padLeft(2, '0')}'
-      '${blue.toRadixString(16).padLeft(2, '0')}';
 }
