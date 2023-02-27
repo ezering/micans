@@ -23,7 +23,7 @@ class MicansColors {
 
 /* These are functionnal colors */
 // $green
-  static const Color green_10 = Color(0x00e8faf0);
+  static const Color green_10 = Color(0x00E8FAF0);
   static const Color green_20 = Color(0x00d7f5e5);
   static const Color green_30 = Color(0x009bebbf);
   static const Color green_40 = Color(0x0051c285);
@@ -32,7 +32,7 @@ class MicansColors {
   static const Color green_70 = Color(0x00006341);
   static const Color green_80 = Color(0x000d4f2b);
   static const Color green_90 = Color(0x0005381d);
-  static const Color green_100 = Color(0x00021f10);
+  static const Color green_100 = Color(0x00021F10);
 
 // $blue
   static const Color blue_10 = Color(0x00f2f7ff);
@@ -56,7 +56,7 @@ class MicansColors {
   static const Color yellow_60 = Color(0x00b26205);
   static const Color yellow_70 = Color(0x00824b0d);
   static const Color yellow_80 = Color(0x00663c0c);
-  static const Color yellow_90 = Color(0x004d2b05);
+  static Color yellow_90 = HexColor.fromHex('0x004d2b05');
   static const Color yellow_100 = Color(0x00331c03);
 
 // $red
@@ -85,5 +85,23 @@ class MicansColors {
   static const Color grey_100 = Color(0x00131214);
 
 // $white
-  static const Color white = Color(0x00ffffff);
+  //static const Color white = Color(0x00ffffff);
+  static const Color white = Colors.red;
+}
+
+extension HexColor on Color {
+  /// String is in the format "aabbcc" or "ffaabbcc" with an optional leading "#".
+  static Color fromHex(String hexString) {
+    final buffer = StringBuffer();
+    if (hexString.length == 6 || hexString.length == 7) buffer.write('ff');
+    buffer.write(hexString.replaceFirst('#', ''));
+    return Color(int.parse(buffer.toString(), radix: 16));
+  }
+
+  /// Prefixes a hash sign if [leadingHashSign] is set to `true` (default is `true`).
+  String toHex({bool leadingHashSign = true}) => '${leadingHashSign ? '#' : ''}'
+      '${alpha.toRadixString(16).padLeft(2, '0')}'
+      '${red.toRadixString(16).padLeft(2, '0')}'
+      '${green.toRadixString(16).padLeft(2, '0')}'
+      '${blue.toRadixString(16).padLeft(2, '0')}';
 }
