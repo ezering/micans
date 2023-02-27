@@ -85,4 +85,7 @@ class MicansColors {
 
 // $white
   static const Color white = Color.fromRGBO(255, 255, 255, 1);
+
+// $Material Color
+  static const Color primaryMaterialColor = primary_60;
 }
