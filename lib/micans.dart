@@ -6,4 +6,4 @@ export 'src/typography/typography.dart';
 export 'src/spacers/spacer.dart';
 
 // constants
-export 'src/colors/colors.dart';
+export 'src/colors/color.dart';
