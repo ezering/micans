@@ -56,7 +56,7 @@ class MicansColors {
   static const Color yellow_60 = Color(0x00b26205);
   static const Color yellow_70 = Color(0x00824b0d);
   static const Color yellow_80 = Color(0x00663c0c);
-  static Color yellow_90 = HexColor.fromHex('0x004d2b05');
+  static Color yellow_90 = HexColor.fromHex('#004d2b05');
   static const Color yellow_100 = Color(0x00331c03);
 
 // $red
