@@ -192,7 +192,7 @@ Widget _getPrimaryButton(MicansBlockButton widget) {
         _getForegroundColor(ButtonType.primary, widget.buttonState),
       ),
       overlayColor: MaterialStateProperty.resolveWith<Color?>(
-        (states) {
+        (Set<MaterialState> states) {
           if (states.contains(MaterialState.pressed)) {
             return _getOverlayColor(widget.buttonType, widget.buttonState);
           }
