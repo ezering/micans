@@ -193,8 +193,8 @@ Widget _getPrimaryButton(MicansBlockButton widget) {
       ),
       overlayColor: MaterialStateProperty.resolveWith<Color?>(
         (Set<MaterialState> states) {
-          if (states.contains(MaterialState.pressed)) {
-            return _getOverlayColor(widget.buttonType, widget.buttonState);
+          if (states.contains(MaterialState.hovered)) {
+            return Colors.redAccent.withOpacity(0.04);
           }
           return null; // Defer to the widget's default.
         },
