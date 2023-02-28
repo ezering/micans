@@ -200,6 +200,9 @@ Widget _getPrimaryButton(MicansBlockButton widget) {
           if (states.contains(MaterialState.pressed)) {
             return _getOverlayColor(ButtonType.primary, widget.buttonState);
           }
+          if (states.contains(MaterialState.hovered)) {
+            return _getOverlayColor(ButtonType.primary, widget.buttonState);
+          }
           return null; // Defer to the widget's default.
         },
       ),
