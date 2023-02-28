@@ -186,9 +186,8 @@ Widget _getPrimaryButton(MicansBlockButton widget) {
   return ElevatedButton(
     onPressed: widget.onPressed,
     style: ElevatedButton.styleFrom(
-      // the fill color of the button
-      backgroundColor: MicansColors.red_100,
       fixedSize: const Size.fromHeight(48),
+      backgroundColor: const Color(0xFF0060E0),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(48),
       ),
