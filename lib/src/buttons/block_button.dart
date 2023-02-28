@@ -3,6 +3,7 @@
 // and can have a state of enabled, hover, focused, pressed; loading, disabled, skeleton
 
 import 'package:flutter/material.dart';
+import 'package:micans/micans.dart';
 
 enum ButtonType { primary, secondary, tertiary, transparent, danger }
 
@@ -168,7 +169,7 @@ Widget _getSecondaryButton(MicansBlockButton widget) {
     height: 48,
     decoration: BoxDecoration(
       color: const Color(0xFFE5E5E5),
-      borderRadius: BorderRadius.circular(4),
+      borderRadius: BorderRadius.circular(48),
     ),
     child: TextButton(
       onPressed: widget.onPressed,
@@ -186,15 +187,20 @@ Widget _getPrimaryButton(MicansBlockButton widget) {
     width: double.infinity,
     height: 48,
     decoration: BoxDecoration(
-      color: const Color(0xFF0060E0),
-      borderRadius: BorderRadius.circular(4),
+      color: MicansColors.primary_60,
+      borderRadius: BorderRadius.circular(48),
     ),
-    child: TextButton(
-      onPressed: widget.onPressed,
-      child: _getButtonContent(
-        widget.iconPosition,
-        widget.icon,
-        widget.text,
+    child: Center(
+      child: ElevatedButton(
+        onPressed: widget.onPressed,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: MicansColors.primary_60,
+        ),
+        child: _getButtonContent(
+          widget.iconPosition,
+          widget.icon,
+          widget.text,
+        ),
       ),
     ),
   );
@@ -203,20 +209,20 @@ Widget _getPrimaryButton(MicansBlockButton widget) {
 _getButtonContent(IconPosition iconPosition, IconData? icon, String text) {
   switch (iconPosition) {
     case IconPosition.none:
-      return Text(text);
+      return MicansTypography.labelMD(text);
     case IconPosition.leading:
       return Row(
         children: [
           Icon(icon),
-          const SizedBox(width: 8),
-          Text(text),
+          const MicansSpacer.space1(),
+          MicansTypography.labelMD(text),
         ],
       );
     case IconPosition.trailing:
       return Row(
         children: [
-          Text(text),
-          const SizedBox(width: 8),
+          MicansTypography.labelMD(text),
+          const MicansSpacer.space1(),
           Icon(icon),
         ],
       );
