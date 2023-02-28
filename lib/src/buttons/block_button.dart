@@ -185,11 +185,20 @@ Widget _getSecondaryButton(MicansBlockButton widget) {
 Widget _getPrimaryButton(MicansBlockButton widget) {
   return ElevatedButton(
     onPressed: widget.onPressed,
-    style: ElevatedButton.styleFrom(
-      fixedSize: const Size.fromHeight(48),
-      backgroundColor: const Color(0xFF0060E0),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(48),
+    style: ButtonStyle(
+      backgroundColor: MaterialStateProperty.all<Color>(
+        _getBackgroundColor(widget.buttonType, widget.buttonState),
+      ),
+      foregroundColor: MaterialStateProperty.all<Color>(
+        _getForegroundColor(widget.buttonType, widget.buttonState),
+      ),
+      overlayColor: MaterialStateProperty.all<Color>(
+        _getOverlayColor(widget.buttonType, widget.buttonState),
+      ),
+      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(48),
+        ),
       ),
     ),
     child: _getButtonContent(
@@ -225,241 +234,273 @@ _getButtonContent(IconPosition iconPosition, IconData? icon, String text) {
   }
 }
 
+Color _getOverlayColor(ButtonType buttonType, ButtonState buttonState) {
+  switch (buttonType) {
+    case ButtonType.primary:
+      switch (buttonState) {
+        case ButtonState.enabled:
+          return const Color(0xFF0060E0);
+        case ButtonState.hover:
+          return const Color(0xFF0050CC);
+        case ButtonState.focused:
+          return const Color(0xFF0040B8);
+        case ButtonState.pressed:
+          return const Color(0xFF0030A5);
+        case ButtonState.loading:
+          return const Color(0xFF002092);
+        case ButtonState.disabled:
+          return const Color(0xFF00107E);
+        case ButtonState.skeleton:
+          return const Color(0xFF00006B);
+      }
+    case ButtonType.secondary:
+      switch (buttonState) {
+        case ButtonState.enabled:
+          return const Color(0xFFD9D9D9);
+        case ButtonState.hover:
+          return const Color(0xFFCCCCCC);
+        case ButtonState.focused:
+          return const Color(0xFFBFBFBF);
+        case ButtonState.pressed:
+          return const Color(0xFFB2B2B2);
+        case ButtonState.loading:
+          return const Color(0xFFA5A5A5);
+        case ButtonState.disabled:
+          return const Color(0xFF999999);
+        case ButtonState.skeleton:
+          return const Color(0xFF8C8C8C);
+      }
+    case ButtonType.tertiary:
+      switch (buttonState) {
+        case ButtonState.enabled:
+          return const Color(0x0D000000);
+        case ButtonState.hover:
+          return const Color(0x1A000000);
+        case ButtonState.focused:
+          return const Color(0x26000000);
+        case ButtonState.pressed:
+          return const Color(0x33000000);
+        case ButtonState.loading:
+          return const Color(0x40000000);
+        case ButtonState.disabled:
+          return const Color(0x4D000000);
+        case ButtonState.skeleton:
+          return const Color(0x5A000000);
+      }
+    case ButtonType.transparent:
+      switch (buttonState) {
+        case ButtonState.enabled:
+          return const Color(0x0D000000);
+        case ButtonState.hover:
+          return const Color(0x1A000000);
+        case ButtonState.focused:
+          return const Color(0x26000000);
+        case ButtonState.pressed:
+          return const Color(0x33000000);
+        case ButtonState.loading:
+          return const Color(0x40000000);
+        case ButtonState.disabled:
+          return const Color(0x4D000000);
+        case ButtonState.skeleton:
+          return const Color(0x5A000000);
+      }
+    case ButtonType.danger:
+      switch (buttonState) {
+        case ButtonState.enabled:
+          return const Color(0xFFD0021B);
+        case ButtonState.hover:
+          return const Color(0xFFC40119);
+        case ButtonState.focused:
+          return const Color(0xFFB80017);
+        case ButtonState.pressed:
+          return const Color(0xFFAB0015);
+        case ButtonState.loading:
+          return const Color(0xFF9E0013);
+        case ButtonState.disabled:
+          return const Color(0xFF910011);
+        case ButtonState.skeleton:
+          return const Color(0xFF84000F);
+      }
+  }
+}
 
+Color _getBackgroundColor(ButtonType buttonType, ButtonState buttonState) {
+  switch (buttonType) {
+    case ButtonType.primary:
+      switch (buttonState) {
+        case ButtonState.enabled:
+          return const Color(0xFF0070F3);
+        case ButtonState.hover:
+          return const Color(0xFF0060E0);
+        case ButtonState.focused:
+          return const Color(0xFF0050CC);
+        case ButtonState.pressed:
+          return const Color(0xFF0040B8);
+        case ButtonState.loading:
+          return const Color(0xFF0030A5);
+        case ButtonState.disabled:
+          return const Color(0xFF002092);
+        case ButtonState.skeleton:
+          return const Color(0xFF00107E);
+      }
+    case ButtonType.secondary:
+      switch (buttonState) {
+        case ButtonState.enabled:
+          return const Color(0xFFE6E6E6);
+        case ButtonState.hover:
+          return const Color(0xFFD9D9D9);
+        case ButtonState.focused:
+          return const Color(0xFFCCCCCC);
+        case ButtonState.pressed:
+          return const Color(0xFFBFBFBF);
+        case ButtonState.loading:
+          return const Color(0xFFB2B2B2);
+        case ButtonState.disabled:
+          return const Color(0xFFA5A5A5);
+        case ButtonState.skeleton:
+          return const Color(0xFF999999);
+      }
+    case ButtonType.tertiary:
+      switch (buttonState) {
+        case ButtonState.enabled:
+          return const Color(0x00000000);
+        case ButtonState.hover:
+          return const Color(0x0D000000);
+        case ButtonState.focused:
+          return const Color(0x1A000000);
+        case ButtonState.pressed:
+          return const Color(0x26000000);
+        case ButtonState.loading:
+          return const Color(0x33000000);
+        case ButtonState.disabled:
+          return const Color(0x40000000);
+        case ButtonState.skeleton:
+          return const Color(0x4D000000);
+      }
+    case ButtonType.transparent:
+      switch (buttonState) {
+        case ButtonState.enabled:
+          return const Color(0x00000000);
+        case ButtonState.hover:
+          return const Color(0x0D000000);
+        case ButtonState.focused:
+          return const Color(0x1A000000);
+        case ButtonState.pressed:
+          return const Color(0x26000000);
+        case ButtonState.loading:
+          return const Color(0x33000000);
+        case ButtonState.disabled:
+          return const Color(0x40000000);
+        case ButtonState.skeleton:
+          return const Color(0x4D000000);
+      }
+    case ButtonType.danger:
+      switch (buttonState) {
+        case ButtonState.enabled:
+          return const Color(0xFFD0021B);
+        case ButtonState.hover:
+          return const Color(0xFFC00119);
+        case ButtonState.focused:
+          return const Color(0xFFB00017);
+        case ButtonState.pressed:
+          return const Color(0xFFA00015);
+        case ButtonState.loading:
+          return const Color(0xFF900013);
+        case ButtonState.disabled:
+          return const Color(0xFF800011);
+        case ButtonState.skeleton:
+          return const Color(0xFF70000F);
+      }
+  }
+}
 
+Color _getForegroundColor(ButtonType buttonType, ButtonState buttonState) {
+  switch (buttonType) {
+    case ButtonType.primary:
+      switch (buttonState) {
+        case ButtonState.enabled:
+          return const Color(0xFFFFFFFF);
+        case ButtonState.hover:
+          return const Color(0xFFFFFFFF);
+        case ButtonState.focused:
+          return const Color(0xFFFFFFFF);
+        case ButtonState.pressed:
+          return const Color(0xFFFFFFFF);
+        case ButtonState.loading:
+          return const Color(0xFFFFFFFF);
+        case ButtonState.disabled:
+          return const Color(0xFFFFFFFF);
+        case ButtonState.skeleton:
+          return const Color(0xFFFFFFFF);
+      }
+    case ButtonType.secondary:
+      switch (buttonState) {
+        case ButtonState.enabled:
+          return const Color(0xFF000000);
+        case ButtonState.hover:
+          return const Color(0xFF000000);
+        case ButtonState.focused:
+          return const Color(0xFF000000);
+        case ButtonState.pressed:
+          return const Color(0xFF000000);
+        case ButtonState.loading:
+          return const Color(0xFF000000);
+        case ButtonState.disabled:
+          return const Color(0xFF000000);
+        case ButtonState.skeleton:
+          return const Color(0xFF000000);
+      }
+    case ButtonType.tertiary:
+      switch (buttonState) {
+        case ButtonState.enabled:
+          return const Color(0xFF000000);
+        case ButtonState.hover:
+          return const Color(0xFF000000);
+        case ButtonState.focused:
+          return const Color(0xFF000000);
+        case ButtonState.pressed:
+          return const Color(0xFF000000);
+        case ButtonState.loading:
+          return const Color(0xFF000000);
+        case ButtonState.disabled:
+          return const Color(0xFF000000);
+        case ButtonState.skeleton:
+          return const Color(0xFF000000);
+      }
+    case ButtonType.transparent:
+      switch (buttonState) {
+        case ButtonState.enabled:
+          return const Color(0xFF000000);
+        case ButtonState.hover:
+          return const Color(0xFF000000);
+        case ButtonState.focused:
+          return const Color(0xFF000000);
+        case ButtonState.pressed:
+          return const Color(0xFF000000);
+        case ButtonState.loading:
+          return const Color(0xFF000000);
+        case ButtonState.disabled:
+          return const Color(0xFF000000);
+        case ButtonState.skeleton:
+          return const Color(0xFF000000);
+      }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// _getButtonContent(IconPosition iconPosition, IconData? icon, String text) {
-//   switch (iconPosition) {
-//     case IconPosition.none:
-//       return Text(text);
-//     case IconPosition.leading:
-//       return Row(
-//         children: [
-//           Icon(icon),
-//           const SizedBox(width: 8),
-//           Text(text),
-//         ],
-//       );
-//     case IconPosition.trailing:
-//       return Row(
-//         children: [
-//           Text(text),
-//           const SizedBox(width: 8),
-//           Icon(icon),
-//         ],
-//       );
-//   }
-// }
-
-// Color _getOverlayColor(ButtonType buttonType, ButtonState buttonState) {
-//   switch (buttonType) {
-//     case ButtonType.primary:
-//       switch (buttonState) {
-//         case ButtonState.enabled:
-//           return const Color(0xFF0060E0);
-//         case ButtonState.hover:
-//           return const Color(0xFF0050CC);
-//         case ButtonState.focused:
-//           return const Color(0xFF0040B8);
-//         case ButtonState.pressed:
-//           return const Color(0xFF0030A5);
-//         case ButtonState.loading:
-//           return const Color(0xFF002092);
-//         case ButtonState.disabled:
-//           return const Color(0xFF00107E);
-//         case ButtonState.skeleton:
-//           return const Color(0xFF00006B);
-//       }
-//     case ButtonType.secondary:
-//       switch (buttonState) {
-//         case ButtonState.enabled:
-//           return const Color(0xFFD9D9D9);
-//         case ButtonState.hover:
-//           return const Color(0xFFCCCCCC);
-//         case ButtonState.focused:
-//           return const Color(0xFFBFBFBF);
-//         case ButtonState.pressed:
-//           return const Color(0xFFB2B2B2);
-//         case ButtonState.loading:
-//           return const Color(0xFFA5A5A5);
-//         case ButtonState.disabled:
-//           return const Color(0xFF999999);
-//         case ButtonState.skeleton:
-//           return const Color(0xFF8C8C8C);
-//       }
-//     case ButtonType.tertiary:
-//       switch (buttonState) {
-//         case ButtonState.enabled:
-//           return const Color(0x0D000000);
-//         case ButtonState.hover:
-//           return const Color(0x1A000000);
-//         case ButtonState.focused:
-//           return const Color(0x26000000);
-//         case ButtonState.pressed:
-//           return const Color(0x33000000);
-//         case ButtonState.loading:
-//           return const Color(0x40000000);
-//         case ButtonState.disabled:
-//           return const Color(0x4D000000);
-//         case ButtonState.skeleton:
-//           return const Color(0x5A000000);
-//       }
-//     case ButtonType.transparent:
-//       switch (buttonState) {
-//         case ButtonState.enabled:
-//           return const Color(0x0D000000);
-//         case ButtonState.hover:
-//           return const Color(0x1A000000);
-//         case ButtonState.focused:
-//           return const Color(0x26000000);
-//         case ButtonState.pressed:
-//           return const Color(0x33000000);
-//         case ButtonState.loading:
-//           return const Color(0x40000000);
-//         case ButtonState.disabled:
-//           return const Color(0x4D000000);
-//         case ButtonState.skeleton:
-//           return const Color(0x5A000000);
-//       }
-//     case ButtonType.danger:
-//       switch (buttonState) {
-//         case ButtonState.enabled:
-//           return const Color(0xFFD0021B);
-//         case ButtonState.hover:
-//           return const Color(0xFFC40119);
-//         case ButtonState.focused:
-//           return const Color(0xFFB80017);
-//         case ButtonState.pressed:
-//           return const Color(0xFFAB0015);
-//         case ButtonState.loading:
-//           return const Color(0xFF9E0013);
-//         case ButtonState.disabled:
-//           return const Color(0xFF910011);
-//         case ButtonState.skeleton:
-//           return const Color(0xFF84000F);
-//       }
-//   }
-// }
-
-// Color _getBackgroundColor(ButtonType buttonType, ButtonState buttonState) {
-//   switch (buttonType) {
-//     case ButtonType.primary:
-//       switch (buttonState) {
-//         case ButtonState.enabled:
-//           return const Color(0xFF0070F3);
-//         case ButtonState.hover:
-//           return const Color(0xFF0060E0);
-//         case ButtonState.focused:
-//           return const Color(0xFF0050CC);
-//         case ButtonState.pressed:
-//           return const Color(0xFF0040B8);
-//         case ButtonState.loading:
-//           return const Color(0xFF0030A5);
-//         case ButtonState.disabled:
-//           return const Color(0xFF002092);
-//         case ButtonState.skeleton:
-//           return const Color(0xFF00107E);
-//       }
-//     case ButtonType.secondary:
-//       switch (buttonState) {
-//         case ButtonState.enabled:
-//           return const Color(0xFFE6E6E6);
-//         case ButtonState.hover:
-//           return const Color(0xFFD9D9D9);
-//         case ButtonState.focused:
-//           return const Color(0xFFCCCCCC);
-//         case ButtonState.pressed:
-//           return const Color(0xFFBFBFBF);
-//         case ButtonState.loading:
-//           return const Color(0xFFB2B2B2);
-//         case ButtonState.disabled:
-//           return const Color(0xFFA5A5A5);
-//         case ButtonState.skeleton:
-//           return const Color(0xFF999999);
-//       }
-//     case ButtonType.tertiary:
-//       switch (buttonState) {
-//         case ButtonState.enabled:
-//           return const Color(0x00000000);
-//         case ButtonState.hover:
-//           return const Color(0x0D000000);
-//         case ButtonState.focused:
-//           return const Color(0x1A000000);
-//         case ButtonState.pressed:
-//           return const Color(0x26000000);
-//         case ButtonState.loading:
-//           return const Color(0x33000000);
-//         case ButtonState.disabled:
-//           return const Color(0x40000000);
-//         case ButtonState.skeleton:
-//           return const Color(0x4D000000);
-//       }
-//     case ButtonType.transparent:
-//       switch (buttonState) {
-//         case ButtonState.enabled:
-//           return const Color(0x00000000);
-//         case ButtonState.hover:
-//           return const Color(0x0D000000);
-//         case ButtonState.focused:
-//           return const Color(0x1A000000);
-//         case ButtonState.pressed:
-//           return const Color(0x26000000);
-//         case ButtonState.loading:
-//           return const Color(0x33000000);
-//         case ButtonState.disabled:
-//           return const Color(0x40000000);
-//         case ButtonState.skeleton:
-//           return const Color(0x4D000000);
-//       }
-//     case ButtonType.danger:
-//       switch (buttonState) {
-//         case ButtonState.enabled:
-//           return const Color(0xFFD0021B);
-//         case ButtonState.hover:
-//           return const Color(0xFFC00119);
-//         case ButtonState.focused:
-//           return const Color(0xFFB00017);
-//         case ButtonState.pressed:
-//           return const Color(0xFFA00015);
-//         case ButtonState.loading:
-//           return const Color(0xFF900013);
-//         case ButtonState.disabled:
-//           return const Color(0xFF800011);
-//         case ButtonState.skeleton:
-//           return const Color(0xFF70000F);
-//       }
-//   }
-// }
+    case ButtonType.danger:
+      switch (buttonState) {
+        case ButtonState.enabled:
+          return const Color(0xFFFFFFFF);
+        case ButtonState.hover:
+          return const Color(0xFFFFFFFF);
+        case ButtonState.focused:
+          return const Color(0xFFFFFFFF);
+        case ButtonState.pressed:
+          return const Color(0xFFFFFFFF);
+        case ButtonState.loading:
+          return const Color(0xFFFFFFFF);
+        case ButtonState.disabled:
+          return const Color(0xFFFFFFFF);
+        case ButtonState.skeleton:
+          return const Color(0xFFFFFFFF);
+      }
+  }
+}
