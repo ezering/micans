@@ -183,25 +183,18 @@ Widget _getSecondaryButton(MicansBlockButton widget) {
 }
 
 Widget _getPrimaryButton(MicansBlockButton widget) {
-  return Container(
-    width: double.infinity,
-    height: 48,
-    decoration: BoxDecoration(
-      color: MicansColors.primary_60,
-      borderRadius: BorderRadius.circular(48),
-    ),
-    child: Center(
-      child: ElevatedButton(
-        onPressed: widget.onPressed,
-        style: ElevatedButton.styleFrom(
-          backgroundColor: MicansColors.primary_60,
-        ),
-        child: _getButtonContent(
-          widget.iconPosition,
-          widget.icon,
-          widget.text,
-        ),
-      ),
+  return ElevatedButton(
+    onPressed: widget.onPressed,
+    style: ElevatedButton.styleFrom(
+        // the fill color of the button
+        backgroundColor: MicansColors.primary_60,
+        // for text and icons inside the button
+        foregroundColor: MicansColors.blue_20,
+        fixedSize: const Size.fromHeight(48)),
+    child: _getButtonContent(
+      widget.iconPosition,
+      widget.icon,
+      widget.text,
     ),
   );
 }
