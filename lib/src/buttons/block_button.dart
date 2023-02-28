@@ -192,8 +192,13 @@ Widget _getPrimaryButton(MicansBlockButton widget) {
       foregroundColor: MaterialStateProperty.all<Color>(
         _getForegroundColor(widget.buttonType, widget.buttonState),
       ),
-      overlayColor: MaterialStateProperty.all<Color>(
-        _getOverlayColor(widget.buttonType, widget.buttonState),
+      overlayColor: MaterialStateProperty.resolveWith<Color?>(
+        (states) {
+          if (states.contains(MaterialState.pressed)) {
+            return _getOverlayColor(widget.buttonType, widget.buttonState);
+          }
+          return null; // Defer to the widget's default.
+        },
       ),
       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
         RoundedRectangleBorder(
@@ -329,19 +334,19 @@ Color _getBackgroundColor(ButtonType buttonType, ButtonState buttonState) {
     case ButtonType.primary:
       switch (buttonState) {
         case ButtonState.enabled:
-          return const Color(0xFF0070F3);
+          return MicansColors.primary_60;
         case ButtonState.hover:
-          return const Color(0xFF0060E0);
+          return MicansColors.primary_70;
         case ButtonState.focused:
-          return const Color(0xFF0050CC);
+          return MicansColors.primary_60;
         case ButtonState.pressed:
-          return const Color(0xFF0040B8);
+          return MicansColors.primary_80;
         case ButtonState.loading:
-          return const Color(0xFF0030A5);
+          return MicansColors.primary_70;
         case ButtonState.disabled:
-          return const Color(0xFF002092);
+          return MicansColors.primary_50;
         case ButtonState.skeleton:
-          return const Color(0xFF00107E);
+          return MicansColors.primary_20;
       }
     case ButtonType.secondary:
       switch (buttonState) {
@@ -419,19 +424,19 @@ Color _getForegroundColor(ButtonType buttonType, ButtonState buttonState) {
     case ButtonType.primary:
       switch (buttonState) {
         case ButtonState.enabled:
-          return const Color(0xFFFFFFFF);
+          return MicansColors.grey_10;
         case ButtonState.hover:
-          return const Color(0xFFFFFFFF);
+          return MicansColors.grey_10;
         case ButtonState.focused:
-          return const Color(0xFFFFFFFF);
+          return MicansColors.grey_10;
         case ButtonState.pressed:
-          return const Color(0xFFFFFFFF);
+          return MicansColors.grey_10;
         case ButtonState.loading:
-          return const Color(0xFFFFFFFF);
+          return MicansColors.grey_20;
         case ButtonState.disabled:
-          return const Color(0xFFFFFFFF);
+          return MicansColors.grey_50;
         case ButtonState.skeleton:
-          return const Color(0xFFFFFFFF);
+          return MicansColors.grey_20;
       }
     case ButtonType.secondary:
       switch (buttonState) {
