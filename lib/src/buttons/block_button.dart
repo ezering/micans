@@ -186,6 +186,14 @@ Widget _getPrimaryButton(MicansBlockButton widget) {
   return ElevatedButton(
     onPressed: widget.onPressed,
     style: ButtonStyle(
+      splashFactory: InkRipple.splashFactory,
+      padding: MaterialStateProperty.all<EdgeInsets>(
+        const EdgeInsets.symmetric(horizontal: 16),
+      ),
+      textStyle: MaterialStateProperty.all<TextStyle>(
+        TextStyle(
+            color: _getOverlayColor(ButtonType.primary, widget.buttonState)),
+      ),
       backgroundColor:
           MaterialStateProperty.all<Color>(MicansColors.primary_60),
       foregroundColor: MaterialStateProperty.all<Color>(
@@ -216,21 +224,21 @@ Widget _getPrimaryButton(MicansBlockButton widget) {
 _getButtonContent(IconPosition iconPosition, IconData? icon, String text) {
   switch (iconPosition) {
     case IconPosition.none:
-      return Text(text);
+      return MicansTypography.labelMD(text);
     case IconPosition.leading:
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(icon),
           const MicansSpacer.space1(),
-          Text(text),
+          MicansTypography.labelMD(text),
         ],
       );
     case IconPosition.trailing:
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(text),
+          MicansTypography.labelMD(text),
           const MicansSpacer.space1(),
           Icon(icon),
         ],
