@@ -186,11 +186,15 @@ Widget _getPrimaryButton(MicansBlockButton widget) {
   return ElevatedButton(
     onPressed: widget.onPressed,
     style: ElevatedButton.styleFrom(
-        // the fill color of the button
-        backgroundColor: MicansColors.primary_60,
-        // for text and icons inside the button
-        foregroundColor: MicansColors.blue_20,
-        fixedSize: const Size.fromHeight(48)),
+      // the fill color of the button
+      backgroundColor: MicansColors.primary_30,
+      // for text and icons inside the button
+      foregroundColor: MicansColors.blue_60,
+      fixedSize: const Size.fromHeight(48),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(48),
+      ),
+    ),
     child: _getButtonContent(
       widget.iconPosition,
       widget.icon,
@@ -205,6 +209,7 @@ _getButtonContent(IconPosition iconPosition, IconData? icon, String text) {
       return MicansTypography.labelMD(text);
     case IconPosition.leading:
       return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(icon),
           const MicansSpacer.space1(),
@@ -213,6 +218,7 @@ _getButtonContent(IconPosition iconPosition, IconData? icon, String text) {
       );
     case IconPosition.trailing:
       return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           MicansTypography.labelMD(text),
           const MicansSpacer.space1(),
