@@ -190,15 +190,15 @@ Widget _getPrimaryButton(MicansBlockButton widget) {
       padding: MaterialStateProperty.all<EdgeInsets>(
         const EdgeInsets.symmetric(horizontal: 16),
       ),
-      backgroundColor:
-          MaterialStateProperty.all<Color>(MicansColors.primary_60),
+      backgroundColor: MaterialStateProperty.all<Color>(
+          _getBackgroundColor(ButtonType.primary, widget.buttonState)),
       foregroundColor: MaterialStateProperty.all<Color>(
         _getForegroundColor(ButtonType.primary, widget.buttonState),
       ),
       overlayColor: MaterialStateProperty.resolveWith<Color?>(
         (Set<MaterialState> states) {
-          if (states.contains(MaterialState.hovered)) {
-            return Colors.redAccent.withOpacity(0.04);
+          if (states.contains(MaterialState.pressed)) {
+            return _getOverlayColor(ButtonType.primary, widget.buttonState);
           }
           return null; // Defer to the widget's default.
         },
@@ -220,21 +220,21 @@ Widget _getPrimaryButton(MicansBlockButton widget) {
 _getButtonContent(IconPosition iconPosition, IconData? icon, String text) {
   switch (iconPosition) {
     case IconPosition.none:
-      return MicansTypography.labelMD(text);
+      return Text(text);
     case IconPosition.leading:
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(icon),
           const MicansSpacer.space1(),
-          MicansTypography.labelMD(text),
+          Text(text),
         ],
       );
     case IconPosition.trailing:
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          MicansTypography.labelMD(text),
+          Text(text),
           const MicansSpacer.space1(),
           Icon(icon),
         ],
