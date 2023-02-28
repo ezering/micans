@@ -216,21 +216,21 @@ Widget _getPrimaryButton(MicansBlockButton widget) {
 _getButtonContent(IconPosition iconPosition, IconData? icon, String text) {
   switch (iconPosition) {
     case IconPosition.none:
-      return MicansTypography.labelMD(text) as Text;
+      return Text(text);
     case IconPosition.leading:
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(icon),
           const MicansSpacer.space1(),
-          MicansTypography.labelMD(text) as Text,
+          Text(text),
         ],
       );
     case IconPosition.trailing:
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          MicansTypography.labelMD(text),
+          Text(text),
           const MicansSpacer.space1(),
           Icon(icon),
         ],
