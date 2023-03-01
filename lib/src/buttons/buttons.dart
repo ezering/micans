@@ -31,8 +31,8 @@ class ButtonBlock extends StatefulWidget {
     this.icon,
     this.onPressed,
   })  : buttonType = ButtonType.primary,
-        buttonState = ButtonState.enabled,
-        assert(iconPosition == IconPosition.none || icon != null);
+        buttonState = ButtonState.enabled;
+
   // ButtonBlock.primaryDisabled
   const ButtonBlock.primaryDisabled({
     super.key,
@@ -42,6 +42,7 @@ class ButtonBlock extends StatefulWidget {
     this.onPressed,
   })  : buttonType = ButtonType.primary,
         buttonState = ButtonState.disabled;
+
   // ButtonBlock.primaryLoading
   const ButtonBlock.primaryLoading({
     super.key,
@@ -70,6 +71,7 @@ class ButtonBlock extends StatefulWidget {
     this.onPressed,
   })  : buttonType = ButtonType.secondary,
         buttonState = ButtonState.disabled;
+
   // ButtonBlock.secondaryLoading
   const ButtonBlock.secondaryLoading({
     super.key,
@@ -89,6 +91,7 @@ class ButtonBlock extends StatefulWidget {
     this.onPressed,
   })  : buttonType = ButtonType.tertiary,
         buttonState = ButtonState.enabled;
+
   // ButtonBlock.tertiaryDisabled
   const ButtonBlock.tertiaryDisabled({
     super.key,
@@ -98,6 +101,7 @@ class ButtonBlock extends StatefulWidget {
     this.onPressed,
   })  : buttonType = ButtonType.tertiary,
         buttonState = ButtonState.disabled;
+
   // ButtonBlock.tertiaryLoading
   const ButtonBlock.tertiaryLoading({
     super.key,
@@ -126,6 +130,7 @@ class ButtonBlock extends StatefulWidget {
     this.onPressed,
   })  : buttonType = ButtonType.transparent,
         buttonState = ButtonState.disabled;
+
   // ButtonBlock.transparentLoading
   const ButtonBlock.transparentLoading({
     super.key,
@@ -145,6 +150,7 @@ class ButtonBlock extends StatefulWidget {
     this.onPressed,
   })  : buttonType = ButtonType.danger,
         buttonState = ButtonState.enabled;
+
   // ButtonBlock.dangerDisabled
   const ButtonBlock.dangerDisabled({
     super.key,
@@ -154,6 +160,7 @@ class ButtonBlock extends StatefulWidget {
     this.onPressed,
   })  : buttonType = ButtonType.danger,
         buttonState = ButtonState.disabled;
+
   // ButtonBlock.dangerLoading
   const ButtonBlock.dangerLoading({
     super.key,
@@ -279,7 +286,7 @@ Widget _primaryButtonBlockDisabled(ButtonBlock widget) {
       padding: MaterialStateProperty.all<EdgeInsets>(
         const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
       ),
-      maximumSize: MaterialStateProperty.all<Size>(
+      fixedSize: MaterialStateProperty.all<Size>(
         const Size(double.infinity, 48),
       ),
       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -310,15 +317,15 @@ Widget _primaryButtonLoading(ButtonBlock widget) {
       overlayColor: MaterialStateProperty.resolveWith<Color>(
         (Set<MaterialState> states) {
           if (states.contains(MaterialState.pressed)) {
-            return MicansColors.primary_10;
+            return MicansColors.primary_30;
           }
-          return MicansColors.primary_10;
+          return MicansColors.grey_30;
         },
       ),
       padding: MaterialStateProperty.all<EdgeInsets>(
         const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
       ),
-      maximumSize: MaterialStateProperty.all<Size>(
+      fixedSize: MaterialStateProperty.all<Size>(
         const Size(double.infinity, 48),
       ),
       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
@@ -335,7 +342,7 @@ Widget _primaryButtonLoading(ButtonBlock widget) {
           width: 16,
           child: CircularProgressIndicator(
             strokeWidth: 2,
-            color: MicansColors.grey_10,
+            color: MicansColors.primary_70,
           ),
         ),
         const SizedBox(width: 8),
@@ -371,7 +378,7 @@ Widget _primaryButtonBlockSkeleton(ButtonBlock widget) {
       padding: MaterialStateProperty.all<EdgeInsets>(
         const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
       ),
-      maximumSize: MaterialStateProperty.all<Size>(
+      fixedSize: MaterialStateProperty.all<Size>(
         const Size(double.infinity, 48),
       ),
       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
