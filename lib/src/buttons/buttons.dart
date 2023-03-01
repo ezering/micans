@@ -543,7 +543,7 @@ _buttonContent(ButtonBlock widget) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          if (widget.icon != null) Icon(widget.icon),
+          if (widget.icon != null) Icon(widget.icon, size: 24),
           Text(widget.text),
         ],
       );
@@ -552,7 +552,7 @@ _buttonContent(ButtonBlock widget) {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(widget.text),
-          if (widget.icon != null) Icon(widget.icon),
+          if (widget.icon != null) Icon(widget.icon, size: 24),
         ],
       );
     case IconPosition.none:
@@ -565,8 +565,8 @@ _loadingContent(ButtonBlock widget, Color iconCustomColor) {
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
       SizedBox(
-        height: 16,
-        width: 16,
+        height: 24,
+        width: 24,
         child: CircularProgressIndicator(
           strokeWidth: 2,
           color: iconCustomColor,
