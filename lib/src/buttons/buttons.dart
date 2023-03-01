@@ -544,7 +544,7 @@ _buttonContent(ButtonBlock widget) {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           if (widget.icon != null) Icon(widget.icon, size: size24),
-          const SizedBox(width: size8),
+          const SizedBox(width: size4),
           _textButtonContent(widget),
         ],
       );
@@ -553,7 +553,7 @@ _buttonContent(ButtonBlock widget) {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           _textButtonContent(widget),
-          const SizedBox(width: size8),
+          const SizedBox(width: size4),
           if (widget.icon != null) Icon(widget.icon, size: size24),
         ],
       );
@@ -574,7 +574,7 @@ _loadingContent(ButtonBlock widget, Color iconCustomColor) {
           color: iconCustomColor,
         ),
       ),
-      const SizedBox(width: size8),
+      const SizedBox(width: size4),
       _textButtonContent(widget),
     ],
   );
