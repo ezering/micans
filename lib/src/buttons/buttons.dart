@@ -23,17 +23,6 @@ class ButtonBlock extends StatefulWidget {
   final IconData? icon;
   final Function()? onPressed;
 
-  // make icon required if iconPosition is not none
-  // const ButtonBlock({
-  //   super.key,
-  //   required this.text,
-  //   required this.buttonType,
-  //   required this.buttonState,
-  //   required this.iconPosition,
-  //   this.icon,
-  //   this.onPressed,
-  // }) : assert(iconPosition == IconPosition.none || icon != null);
-
   // ButtonBlock.primaryEnabled
   const ButtonBlock.primaryEnabled({
     super.key,
@@ -198,8 +187,7 @@ class _ButtonBlockState extends State<ButtonBlock> {
       case ButtonType.primary:
         return _primaryButtonBlock(widget);
       case ButtonType.secondary:
-        return const Placeholder();
-      // return _secondaryButtonBlock();
+        return _secondaryButtonBlock(widget);
       case ButtonType.tertiary:
         return const Placeholder();
       // return _tertiaryButtonBlock();
@@ -216,6 +204,7 @@ class _ButtonBlockState extends State<ButtonBlock> {
   }
 }
 
+// Primary Button Block
 Widget _primaryButtonBlock(ButtonBlock widget) {
   return ElevatedButton(
     onPressed: widget.onPressed,
@@ -236,6 +225,45 @@ Widget _primaryButtonBlock(ButtonBlock widget) {
             return MicansColors.primary_80;
           }
           return MicansColors.primary_80;
+        },
+      ),
+      padding: MaterialStateProperty.all<EdgeInsets>(
+        const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+      ),
+      maximumSize: MaterialStateProperty.all<Size>(
+        const Size(double.infinity, 48),
+      ),
+      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(48),
+        ),
+      ),
+    ),
+    child: _buttonContent(widget),
+  );
+}
+
+// Secondary Button Block
+Widget _secondaryButtonBlock(ButtonBlock widget) {
+  return OutlinedButton(
+    onPressed: widget.onPressed,
+    style: ButtonStyle(
+      backgroundColor: MaterialStateProperty.all<Color>(
+        widget.buttonState == ButtonState.enabled
+            ? MicansColors.grey_20
+            : MicansColors.grey_20,
+      ),
+      foregroundColor: MaterialStateProperty.all<Color>(
+        widget.buttonState == ButtonState.enabled
+            ? MicansColors.grey_100
+            : MicansColors.grey_100,
+      ),
+      overlayColor: MaterialStateProperty.resolveWith<Color>(
+        (Set<MaterialState> states) {
+          if (states.contains(MaterialState.pressed)) {
+            return MicansColors.grey_40;
+          }
+          return MicansColors.grey_40;
         },
       ),
       padding: MaterialStateProperty.all<EdgeInsets>(
