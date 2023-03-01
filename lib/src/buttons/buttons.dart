@@ -179,9 +179,23 @@ class _ButtonBlockState extends State<ButtonBlock> {
             return _tertiaryButtonBlockEnabled(widget);
         }
       case ButtonType.transparent:
-        return const Placeholder();
+        switch (widget.buttonState) {
+          case ButtonState.enabled:
+            return _transparentButtonBlockEnabled(widget);
+          case ButtonState.loading:
+            return _transparentButtonBlockLoading(widget);
+          default:
+            return _transparentButtonBlockEnabled(widget);
+        }
       case ButtonType.danger:
-        return const Placeholder();
+        switch (widget.buttonState) {
+          case ButtonState.enabled:
+            return _dangerButtonBlockEnabled(widget);
+          case ButtonState.loading:
+            return _dangerButtonBlockLoading(widget);
+          default:
+            return _dangerButtonBlockEnabled(widget);
+        }
       case ButtonType.disabled:
         return _disabledButtonBlock(widget);
       case ButtonType.skeleton:
@@ -437,6 +451,162 @@ Widget _tertiaryButtonBlockLoading(ButtonBlock widget) {
       ),
     ),
     child: _loadingContent(widget, MicansColors.primary_60),
+  );
+}
+
+// Transparent button block enabled
+Widget _transparentButtonBlockEnabled(ButtonBlock widget) {
+  return TextButton(
+    onPressed: widget.onPressed,
+    style: ButtonStyle(
+      backgroundColor: MaterialStateProperty.all<Color>(
+        widget.buttonState == ButtonState.enabled
+            ? MicansColors.white
+            : MicansColors.white,
+      ),
+      foregroundColor: MaterialStateProperty.all<Color>(
+        widget.buttonState == ButtonState.enabled
+            ? MicansColors.primary_70
+            : MicansColors.primary_70,
+      ),
+      overlayColor: MaterialStateProperty.resolveWith<Color>(
+        (Set<MaterialState> states) {
+          if (states.contains(MaterialState.pressed)) {
+            return MicansColors.grey_30;
+          }
+          return MicansColors.grey_30;
+        },
+      ),
+      padding: MaterialStateProperty.all<EdgeInsets>(
+        const EdgeInsets.symmetric(vertical: size12, horizontal: size16),
+      ),
+      fixedSize: MaterialStateProperty.all<Size>(
+        const Size(double.infinity, size48),
+      ),
+      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(size48),
+        ),
+      ),
+    ),
+    child: _buttonContent(widget),
+  );
+}
+
+// Transparent button block loading
+Widget _transparentButtonBlockLoading(ButtonBlock widget) {
+  return TextButton(
+    onPressed: null,
+    style: ButtonStyle(
+      backgroundColor: MaterialStateProperty.all<Color>(
+        widget.buttonState == ButtonState.loading
+            ? MicansColors.white
+            : MicansColors.white,
+      ),
+      foregroundColor: MaterialStateProperty.all<Color>(
+        widget.buttonState == ButtonState.loading
+            ? MicansColors.primary_60
+            : MicansColors.primary_60,
+      ),
+      overlayColor: MaterialStateProperty.resolveWith<Color>(
+        (Set<MaterialState> states) {
+          if (states.contains(MaterialState.pressed)) {
+            return MicansColors.grey_30;
+          }
+          return MicansColors.grey_30;
+        },
+      ),
+      padding: MaterialStateProperty.all<EdgeInsets>(
+        const EdgeInsets.symmetric(vertical: size12, horizontal: size16),
+      ),
+      fixedSize: MaterialStateProperty.all<Size>(
+        const Size(double.infinity, size48),
+      ),
+      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(size48),
+        ),
+      ),
+    ),
+    child: _loadingContent(widget, MicansColors.primary_60),
+  );
+}
+
+// Danger button block enabled
+Widget _dangerButtonBlockEnabled(ButtonBlock widget) {
+  return ElevatedButton(
+    onPressed: widget.onPressed,
+    style: ButtonStyle(
+      backgroundColor: MaterialStateProperty.all<Color>(
+        widget.buttonState == ButtonState.enabled
+            ? MicansColors.red_50
+            : MicansColors.red_50,
+      ),
+      foregroundColor: MaterialStateProperty.all<Color>(
+        widget.buttonState == ButtonState.enabled
+            ? MicansColors.white
+            : MicansColors.white,
+      ),
+      overlayColor: MaterialStateProperty.resolveWith<Color>(
+        (Set<MaterialState> states) {
+          if (states.contains(MaterialState.pressed)) {
+            return MicansColors.red_70;
+          }
+          return MicansColors.red_70;
+        },
+      ),
+      padding: MaterialStateProperty.all<EdgeInsets>(
+        const EdgeInsets.symmetric(vertical: size12, horizontal: size16),
+      ),
+      fixedSize: MaterialStateProperty.all<Size>(
+        const Size(double.infinity, size48),
+      ),
+      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(size48),
+        ),
+      ),
+    ),
+    child: _buttonContent(widget),
+  );
+}
+
+// Danger button block loading
+Widget _dangerButtonBlockLoading(ButtonBlock widget) {
+  return ElevatedButton(
+    onPressed: null,
+    style: ButtonStyle(
+      backgroundColor: MaterialStateProperty.all<Color>(
+        widget.buttonState == ButtonState.loading
+            ? MicansColors.red_70
+            : MicansColors.red_70,
+      ),
+      foregroundColor: MaterialStateProperty.all<Color>(
+        widget.buttonState == ButtonState.loading
+            ? MicansColors.white
+            : MicansColors.white,
+      ),
+      overlayColor: MaterialStateProperty.resolveWith<Color>(
+        (Set<MaterialState> states) {
+          if (states.contains(MaterialState.pressed)) {
+            return MicansColors.red_70;
+          }
+          return MicansColors.red_70;
+        },
+      ),
+      padding: MaterialStateProperty.all<EdgeInsets>(
+        const EdgeInsets.symmetric(vertical: size12, horizontal: size16),
+      ),
+      fixedSize: MaterialStateProperty.all<Size>(
+        const Size(double.infinity, size48),
+      ),
+      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(size48),
+        ),
+      ),
+    ),
+    child: _loadingContent(widget, MicansColors.white),
   );
 }
 
