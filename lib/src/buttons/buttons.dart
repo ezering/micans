@@ -234,7 +234,7 @@ Widget _primaryButtonBlock(ButtonBlock widget) {
       ),
       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
         RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(6.0),
+          borderRadius: BorderRadius.circular(48),
         ),
       ),
     ),
