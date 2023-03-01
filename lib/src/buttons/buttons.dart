@@ -1,16 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:micans/micans.dart';
 
-enum ButtonType { primary, secondary, tertiary, transparent, danger, skeleton }
+enum ButtonType {
+  primary,
+  secondary,
+  tertiary,
+  transparent,
+  danger,
+  skeleton,
+  disabled
+}
 
 enum IconPosition { none, leading, trailing }
 
-enum ButtonState { enabled, loading, disabled, skeleton }
+enum ButtonState { enabled, loading }
+//disabled, skeleton
 
 class ButtonBlock extends StatefulWidget {
   final String text;
   final ButtonType buttonType;
-  final ButtonState buttonState;
+  final ButtonState? buttonState;
   final IconPosition iconPosition;
   final IconData? icon;
   final Function()? onPressed;
@@ -24,16 +33,6 @@ class ButtonBlock extends StatefulWidget {
     this.onPressed,
   })  : buttonType = ButtonType.primary,
         buttonState = ButtonState.enabled;
-
-  // ButtonBlock.primaryDisabled
-  const ButtonBlock.primaryDisabled({
-    super.key,
-    required this.text,
-    required this.iconPosition,
-    this.icon,
-    this.onPressed,
-  })  : buttonType = ButtonType.primary,
-        buttonState = ButtonState.disabled;
 
   // ButtonBlock.primaryLoading
   const ButtonBlock.primaryLoading({
@@ -54,15 +53,6 @@ class ButtonBlock extends StatefulWidget {
     this.onPressed,
   })  : buttonType = ButtonType.secondary,
         buttonState = ButtonState.enabled;
-  // ButtonBlock.secondaryDisabled
-  const ButtonBlock.secondaryDisabled({
-    super.key,
-    required this.text,
-    required this.iconPosition,
-    this.icon,
-    this.onPressed,
-  })  : buttonType = ButtonType.secondary,
-        buttonState = ButtonState.disabled;
 
   // ButtonBlock.secondaryLoading
   const ButtonBlock.secondaryLoading({
@@ -84,16 +74,6 @@ class ButtonBlock extends StatefulWidget {
   })  : buttonType = ButtonType.tertiary,
         buttonState = ButtonState.enabled;
 
-  // ButtonBlock.tertiaryDisabled
-  const ButtonBlock.tertiaryDisabled({
-    super.key,
-    required this.text,
-    required this.iconPosition,
-    this.icon,
-    this.onPressed,
-  })  : buttonType = ButtonType.tertiary,
-        buttonState = ButtonState.disabled;
-
   // ButtonBlock.tertiaryLoading
   const ButtonBlock.tertiaryLoading({
     super.key,
@@ -113,15 +93,6 @@ class ButtonBlock extends StatefulWidget {
     this.onPressed,
   })  : buttonType = ButtonType.transparent,
         buttonState = ButtonState.enabled;
-  // ButtonBlock.transparentDisabled
-  const ButtonBlock.transparentDisabled({
-    super.key,
-    required this.text,
-    required this.iconPosition,
-    this.icon,
-    this.onPressed,
-  })  : buttonType = ButtonType.transparent,
-        buttonState = ButtonState.disabled;
 
   // ButtonBlock.transparentLoading
   const ButtonBlock.transparentLoading({
@@ -143,16 +114,6 @@ class ButtonBlock extends StatefulWidget {
   })  : buttonType = ButtonType.danger,
         buttonState = ButtonState.enabled;
 
-  // ButtonBlock.dangerDisabled
-  const ButtonBlock.dangerDisabled({
-    super.key,
-    required this.text,
-    required this.iconPosition,
-    this.icon,
-    this.onPressed,
-  })  : buttonType = ButtonType.danger,
-        buttonState = ButtonState.disabled;
-
   // ButtonBlock.dangerLoading
   const ButtonBlock.dangerLoading({
     super.key,
@@ -164,14 +125,24 @@ class ButtonBlock extends StatefulWidget {
         buttonState = ButtonState.loading;
 
   // ButtonBlock.skeleton
-  const ButtonBlock.skeleton({
-    super.key,
-    required this.text,
-    required this.iconPosition,
-    this.icon,
-    this.onPressed,
-  })  : buttonType = ButtonType.skeleton,
-        buttonState = ButtonState.skeleton;
+  const ButtonBlock.skeleton(
+      {super.key,
+      required this.text,
+      required this.iconPosition,
+      this.icon,
+      this.onPressed,
+      this.buttonState})
+      : buttonType = ButtonType.skeleton;
+
+  // ButtonBlock.Disabled
+  const ButtonBlock.disabled(
+      {super.key,
+      required this.text,
+      required this.iconPosition,
+      this.icon,
+      this.onPressed,
+      this.buttonState})
+      : buttonType = ButtonType.primary;
 
   @override
   State<ButtonBlock> createState() => _ButtonBlockState();
@@ -185,36 +156,37 @@ class _ButtonBlockState extends State<ButtonBlock> {
         switch (widget.buttonState) {
           case ButtonState.enabled:
             return _primaryButtonBlockEnabled(widget);
-          case ButtonState.disabled:
-            return _primaryButtonBlockDisabled(widget);
           case ButtonState.loading:
-            return _primaryButtonLoading(widget);
-          case ButtonState.skeleton:
-            return _primaryButtonBlockSkeleton(widget);
+            return _primaryButtonBlockLoading(widget);
+          default:
+            return _primaryButtonBlockEnabled(widget);
         }
       case ButtonType.secondary:
         switch (widget.buttonState) {
           case ButtonState.enabled:
             return _secondaryButtonBlockEnabled(widget);
-          case ButtonState.disabled:
-            return _secondaryButtonBlockDisabled(widget);
           case ButtonState.loading:
             return _secondaryButtonBlockLoading(widget);
-          case ButtonState.skeleton:
-            return _secondaryButtonBlockSkeleton(widget);
+          default:
+            return _secondaryButtonBlockEnabled(widget);
         }
       case ButtonType.tertiary:
-        return const Placeholder();
-      // return _tertiaryButtonBlock();
+        switch (widget.buttonState) {
+          case ButtonState.enabled:
+            return _tertiaryButtonBlockEnabled(widget);
+          case ButtonState.loading:
+            return _tertiaryButtonBlockLoading(widget);
+          default:
+            return _tertiaryButtonBlockEnabled(widget);
+        }
       case ButtonType.transparent:
         return const Placeholder();
-      // return _transparentButtonBlock();
       case ButtonType.danger:
         return const Placeholder();
-      // return _dangerButtonBlock();
+      case ButtonType.disabled:
+        return _disabledButtonBlock(widget);
       case ButtonType.skeleton:
-        return const Placeholder();
-      // return _skeletonButtonBlock();
+        return _skeletonButtonBlock(widget);
     }
   }
 }
@@ -258,47 +230,8 @@ Widget _primaryButtonBlockEnabled(ButtonBlock widget) {
   );
 }
 
-// Primary Button Block Disabled
-Widget _primaryButtonBlockDisabled(ButtonBlock widget) {
-  return ElevatedButton(
-    onPressed: null,
-    style: ButtonStyle(
-      backgroundColor: MaterialStateProperty.all<Color>(
-        widget.buttonState == ButtonState.enabled
-            ? MicansColors.grey_30
-            : MicansColors.grey_30,
-      ),
-      foregroundColor: MaterialStateProperty.all<Color>(
-        widget.buttonState == ButtonState.enabled
-            ? MicansColors.grey_50
-            : MicansColors.grey_50,
-      ),
-      overlayColor: MaterialStateProperty.resolveWith<Color>(
-        (Set<MaterialState> states) {
-          if (states.contains(MaterialState.pressed)) {
-            return MicansColors.grey_20;
-          }
-          return MicansColors.grey_20;
-        },
-      ),
-      padding: MaterialStateProperty.all<EdgeInsets>(
-        const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-      ),
-      fixedSize: MaterialStateProperty.all<Size>(
-        const Size(double.infinity, 48),
-      ),
-      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-        RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(48),
-        ),
-      ),
-    ),
-    child: _buttonContent(widget),
-  );
-}
-
 // Primary Button Block Loading
-Widget _primaryButtonLoading(ButtonBlock widget) {
+Widget _primaryButtonBlockLoading(ButtonBlock widget) {
   return ElevatedButton(
     onPressed: null,
     style: ButtonStyle(
@@ -350,50 +283,6 @@ Widget _primaryButtonLoading(ButtonBlock widget) {
   );
 }
 
-// Primary Button Block Skeleton
-Widget _primaryButtonBlockSkeleton(ButtonBlock widget) {
-  return ElevatedButton(
-    onPressed: null,
-    style: ButtonStyle(
-      backgroundColor: MaterialStateProperty.all<Color>(
-        widget.buttonState == ButtonState.enabled
-            ? MicansColors.grey_20
-            : MicansColors.grey_20,
-      ),
-      foregroundColor: MaterialStateProperty.all<Color>(
-        widget.buttonState == ButtonState.enabled
-            ? MicansColors.grey_20
-            : MicansColors.grey_20,
-      ),
-      overlayColor: MaterialStateProperty.resolveWith<Color>(
-        (Set<MaterialState> states) {
-          if (states.contains(MaterialState.pressed)) {
-            return MicansColors.grey_20;
-          }
-          return MicansColors.grey_20;
-        },
-      ),
-      padding: MaterialStateProperty.all<EdgeInsets>(
-        const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-      ),
-      fixedSize: MaterialStateProperty.all<Size>(
-        const Size(double.infinity, 48),
-      ),
-      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-        RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(48),
-        ),
-      ),
-    ),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: const [
-        Text(''),
-      ],
-    ),
-  );
-}
-
 // Secondary Button Block Enabled
 Widget _secondaryButtonBlockEnabled(ButtonBlock widget) {
   return OutlinedButton(
@@ -408,45 +297,6 @@ Widget _secondaryButtonBlockEnabled(ButtonBlock widget) {
         widget.buttonState == ButtonState.enabled
             ? MicansColors.grey_100
             : MicansColors.grey_100,
-      ),
-      overlayColor: MaterialStateProperty.resolveWith<Color>(
-        (Set<MaterialState> states) {
-          if (states.contains(MaterialState.pressed)) {
-            return MicansColors.grey_40;
-          }
-          return MicansColors.grey_40;
-        },
-      ),
-      padding: MaterialStateProperty.all<EdgeInsets>(
-        const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-      ),
-      fixedSize: MaterialStateProperty.all<Size>(
-        const Size(double.infinity, 48),
-      ),
-      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-        RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(48),
-        ),
-      ),
-    ),
-    child: _buttonContent(widget),
-  );
-}
-
-// Secondary Button Block Disabled
-Widget _secondaryButtonBlockDisabled(ButtonBlock widget) {
-  return OutlinedButton(
-    onPressed: null,
-    style: ButtonStyle(
-      backgroundColor: MaterialStateProperty.all<Color>(
-        widget.buttonState == ButtonState.enabled
-            ? MicansColors.grey_30
-            : MicansColors.grey_30,
-      ),
-      foregroundColor: MaterialStateProperty.all<Color>(
-        widget.buttonState == ButtonState.enabled
-            ? MicansColors.grey_50
-            : MicansColors.grey_50,
       ),
       overlayColor: MaterialStateProperty.resolveWith<Color>(
         (Set<MaterialState> states) {
@@ -525,27 +375,82 @@ Widget _secondaryButtonBlockLoading(ButtonBlock widget) {
   );
 }
 
-// Secondary Button Block skeleton
-Widget _secondaryButtonBlockSkeleton(ButtonBlock widget) {
+// Tertiary button block enabled
+Widget _tertiaryButtonBlockEnabled(ButtonBlock widget) {
+  return OutlinedButton(
+    onPressed: widget.onPressed,
+    style: ButtonStyle(
+      backgroundColor: MaterialStateProperty.all<Color>(
+        widget.buttonState == ButtonState.enabled
+            ? MicansColors.white
+            : MicansColors.white,
+      ),
+      side: MaterialStateProperty.all<BorderSide>(
+        BorderSide(
+          color: widget.buttonState == ButtonState.enabled
+              ? MicansColors.primary_70
+              : MicansColors.primary_70,
+          width: 1,
+        ),
+      ),
+      foregroundColor: MaterialStateProperty.all<Color>(
+        widget.buttonState == ButtonState.enabled
+            ? MicansColors.primary_70
+            : MicansColors.primary_70,
+      ),
+      overlayColor: MaterialStateProperty.resolveWith<Color>(
+        (Set<MaterialState> states) {
+          if (states.contains(MaterialState.pressed)) {
+            return MicansColors.grey_30;
+          }
+          return MicansColors.grey_30;
+        },
+      ),
+      padding: MaterialStateProperty.all<EdgeInsets>(
+        const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+      ),
+      fixedSize: MaterialStateProperty.all<Size>(
+        const Size(double.infinity, 48),
+      ),
+      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(48),
+        ),
+      ),
+    ),
+    child: _buttonContent(widget),
+  );
+}
+
+// Tertiary button block loading
+Widget _tertiaryButtonBlockLoading(ButtonBlock widget) {
   return OutlinedButton(
     onPressed: null,
     style: ButtonStyle(
       backgroundColor: MaterialStateProperty.all<Color>(
         widget.buttonState == ButtonState.enabled
-            ? MicansColors.grey_20
-            : MicansColors.grey_20,
+            ? MicansColors.white
+            : MicansColors.white,
+      ),
+      side: MaterialStateProperty.all<BorderSide>(
+        BorderSide(
+          color: widget.buttonState == ButtonState.enabled
+              ? MicansColors.primary_60
+              : MicansColors.primary_60,
+          width: 1,
+        ),
       ),
       foregroundColor: MaterialStateProperty.all<Color>(
         widget.buttonState == ButtonState.enabled
-            ? MicansColors.grey_20
-            : MicansColors.grey_20,
+            ? MicansColors.primary_70
+            : MicansColors.primary_70,
       ),
       overlayColor: MaterialStateProperty.resolveWith<Color>(
         (Set<MaterialState> states) {
           if (states.contains(MaterialState.pressed)) {
-            return MicansColors.grey_20;
+            return MicansColors.grey_30;
           }
-          return MicansColors.grey_20;
+          return MicansColors.grey_30;
         },
       ),
       padding: MaterialStateProperty.all<EdgeInsets>(
@@ -562,13 +467,119 @@ Widget _secondaryButtonBlockSkeleton(ButtonBlock widget) {
     ),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: const [
-        Text(''),
+      children: [
+        const SizedBox(
+          height: 16,
+          width: 16,
+          child: CircularProgressIndicator(
+            strokeWidth: 2,
+            color: MicansColors.primary_60,
+          ),
+        ),
+        const SizedBox(width: 8),
+        Text(widget.text),
       ],
     ),
   );
 }
 
+// Disabled button block
+Widget _disabledButtonBlock(ButtonBlock widget) {
+  return OutlinedButton(
+    onPressed: null,
+    style: ButtonStyle(
+      backgroundColor: MaterialStateProperty.all<Color>(
+        widget.buttonState == ButtonState.enabled
+            ? MicansColors.grey_30
+            : MicansColors.grey_30,
+      ),
+      foregroundColor: MaterialStateProperty.all<Color>(
+        widget.buttonState == ButtonState.enabled
+            ? MicansColors.grey_50
+            : MicansColors.grey_50,
+      ),
+      overlayColor: MaterialStateProperty.resolveWith<Color>(
+        (Set<MaterialState> states) {
+          if (states.contains(MaterialState.pressed)) {
+            return MicansColors.grey_40;
+          }
+          return MicansColors.grey_40;
+        },
+      ),
+      padding: MaterialStateProperty.all<EdgeInsets>(
+        const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+      ),
+      fixedSize: MaterialStateProperty.all<Size>(
+        const Size(double.infinity, 48),
+      ),
+      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(48),
+        ),
+      ),
+    ),
+    child: _buttonContent(widget),
+  );
+}
+
+// Skeleton button block
+Widget _skeletonButtonBlock(ButtonBlock widget) {
+  return OutlinedButton(
+    onPressed: null,
+    style: ButtonStyle(
+      backgroundColor: MaterialStateProperty.all<Color>(
+        widget.buttonState == ButtonState.enabled
+            ? MicansColors.grey_30
+            : MicansColors.grey_30,
+      ),
+      foregroundColor: MaterialStateProperty.all<Color>(
+        widget.buttonState == ButtonState.enabled
+            ? MicansColors.grey_50
+            : MicansColors.grey_50,
+      ),
+      overlayColor: MaterialStateProperty.resolveWith<Color>(
+        (Set<MaterialState> states) {
+          if (states.contains(MaterialState.pressed)) {
+            return MicansColors.grey_40;
+          }
+          return MicansColors.grey_40;
+        },
+      ),
+      padding: MaterialStateProperty.all<EdgeInsets>(
+        const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+      ),
+      fixedSize: MaterialStateProperty.all<Size>(
+        const Size(double.infinity, 48),
+      ),
+      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(48),
+        ),
+      ),
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const SizedBox(
+          height: 16,
+          width: 16,
+          child: CircularProgressIndicator(
+            strokeWidth: 2,
+            color: MicansColors.grey_60,
+          ),
+        ),
+        const SizedBox(width: 8),
+        Container(
+          height: 16,
+          width: 64,
+          color: MicansColors.grey_60,
+        ),
+      ],
+    ),
+  );
+}
+
+// Button content
 _buttonContent(ButtonBlock widget) {
   switch (widget.iconPosition) {
     case IconPosition.leading:
@@ -591,3 +602,229 @@ _buttonContent(ButtonBlock widget) {
       return Text(widget.text);
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Widget _primaryButtonBlockDisabled(ButtonBlock widget) {
+//   return ElevatedButton(
+//     onPressed: null,
+//     style: ButtonStyle(
+//       backgroundColor: MaterialStateProperty.all<Color>(
+//         widget.buttonState == ButtonState.enabled
+//             ? MicansColors.grey_30
+//             : MicansColors.grey_30,
+//       ),
+//       foregroundColor: MaterialStateProperty.all<Color>(
+//         widget.buttonState == ButtonState.enabled
+//             ? MicansColors.grey_50
+//             : MicansColors.grey_50,
+//       ),
+//       overlayColor: MaterialStateProperty.resolveWith<Color>(
+//         (Set<MaterialState> states) {
+//           if (states.contains(MaterialState.pressed)) {
+//             return MicansColors.grey_20;
+//           }
+//           return MicansColors.grey_20;
+//         },
+//       ),
+//       padding: MaterialStateProperty.all<EdgeInsets>(
+//         const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+//       ),
+//       fixedSize: MaterialStateProperty.all<Size>(
+//         const Size(double.infinity, 48),
+//       ),
+//       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+//         RoundedRectangleBorder(
+//           borderRadius: BorderRadius.circular(48),
+//         ),
+//       ),
+//     ),
+//     child: _buttonContent(widget),
+//   );
+// }
+
+// Primary Button Block Skeleton
+// Widget _primaryButtonBlockSkeleton(ButtonBlock widget) {
+//   return ElevatedButton(
+//     onPressed: null,
+//     style: ButtonStyle(
+//       backgroundColor: MaterialStateProperty.all<Color>(
+//         widget.buttonState == ButtonState.enabled
+//             ? MicansColors.grey_20
+//             : MicansColors.grey_20,
+//       ),
+//       foregroundColor: MaterialStateProperty.all<Color>(
+//         widget.buttonState == ButtonState.enabled
+//             ? MicansColors.grey_20
+//             : MicansColors.grey_20,
+//       ),
+//       overlayColor: MaterialStateProperty.resolveWith<Color>(
+//         (Set<MaterialState> states) {
+//           if (states.contains(MaterialState.pressed)) {
+//             return MicansColors.grey_20;
+//           }
+//           return MicansColors.grey_20;
+//         },
+//       ),
+//       padding: MaterialStateProperty.all<EdgeInsets>(
+//         const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+//       ),
+//       fixedSize: MaterialStateProperty.all<Size>(
+//         const Size(double.infinity, 48),
+//       ),
+//       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+//         RoundedRectangleBorder(
+//           borderRadius: BorderRadius.circular(48),
+//         ),
+//       ),
+//     ),
+//     child: Row(
+//       mainAxisAlignment: MainAxisAlignment.center,
+//       children: const [
+//         Text(''),
+//       ],
+//     ),
+//   );
+// }
+
+// Secondary Button Block Disabled
+// Widget _secondaryButtonBlockDisabled(ButtonBlock widget) {
+//   return OutlinedButton(
+//     onPressed: null,
+//     style: ButtonStyle(
+//       backgroundColor: MaterialStateProperty.all<Color>(
+//         widget.buttonState == ButtonState.enabled
+//             ? MicansColors.grey_30
+//             : MicansColors.grey_30,
+//       ),
+//       foregroundColor: MaterialStateProperty.all<Color>(
+//         widget.buttonState == ButtonState.enabled
+//             ? MicansColors.grey_50
+//             : MicansColors.grey_50,
+//       ),
+//       overlayColor: MaterialStateProperty.resolveWith<Color>(
+//         (Set<MaterialState> states) {
+//           if (states.contains(MaterialState.pressed)) {
+//             return MicansColors.grey_40;
+//           }
+//           return MicansColors.grey_40;
+//         },
+//       ),
+//       padding: MaterialStateProperty.all<EdgeInsets>(
+//         const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+//       ),
+//       fixedSize: MaterialStateProperty.all<Size>(
+//         const Size(double.infinity, 48),
+//       ),
+//       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+//         RoundedRectangleBorder(
+//           borderRadius: BorderRadius.circular(48),
+//         ),
+//       ),
+//     ),
+//     child: _buttonContent(widget),
+//   );
+// }
+
+// Secondary Button Block skeleton
+// Widget _secondaryButtonBlockSkeleton(ButtonBlock widget) {
+//   return OutlinedButton(
+//     onPressed: null,
+//     style: ButtonStyle(
+//       backgroundColor: MaterialStateProperty.all<Color>(
+//         widget.buttonState == ButtonState.enabled
+//             ? MicansColors.grey_20
+//             : MicansColors.grey_20,
+//       ),
+//       foregroundColor: MaterialStateProperty.all<Color>(
+//         widget.buttonState == ButtonState.enabled
+//             ? MicansColors.grey_20
+//             : MicansColors.grey_20,
+//       ),
+//       overlayColor: MaterialStateProperty.resolveWith<Color>(
+//         (Set<MaterialState> states) {
+//           if (states.contains(MaterialState.pressed)) {
+//             return MicansColors.grey_20;
+//           }
+//           return MicansColors.grey_20;
+//         },
+//       ),
+//       padding: MaterialStateProperty.all<EdgeInsets>(
+//         const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+//       ),
+//       fixedSize: MaterialStateProperty.all<Size>(
+//         const Size(double.infinity, 48),
+//       ),
+//       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+//         RoundedRectangleBorder(
+//           borderRadius: BorderRadius.circular(48),
+//         ),
+//       ),
+//     ),
+//     child: Row(
+//       mainAxisAlignment: MainAxisAlignment.center,
+//       children: const [
+//         Text(''),
+//       ],
+//     ),
+//   );
+// }
+
+// Tertiary button block disabled
+// Widget _tertiaryButtonBlockDisabled(ButtonBlock widget) {
+//   return OutlinedButton(
+//     onPressed: null,
+//     style: ButtonStyle(
+//       backgroundColor: MaterialStateProperty.all<Color>(
+//         widget.buttonState == ButtonState.enabled
+//             ? MicansColors.grey_30
+//             : MicansColors.grey_30,
+//       ),
+//       side: MaterialStateProperty.all<BorderSide>(
+//         BorderSide(
+//           color: widget.buttonState == ButtonState.enabled
+//               ? MicansColors.grey_30
+//               : MicansColors.grey_30,
+//           width: 1,
+//         ),
+//       ),
+//       foregroundColor: MaterialStateProperty.all<Color>(
+//         widget.buttonState == ButtonState.enabled
+//             ? MicansColors.grey_30
+//             : MicansColors.grey_30,
+//       ),
+//       overlayColor: MaterialStateProperty.resolveWith<Color>(
+//         (Set<MaterialState> states) {
+//           if (states.contains(MaterialState.pressed)) {
+//             return MicansColors.grey_30;
+//           }
+//           return MicansColors.grey_30;
+//         },
+//       ),
+//       padding: MaterialStateProperty.all<EdgeInsets>(
+//         const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+//       ),
+//       fixedSize: MaterialStateProperty.all<Size>(
+//         const Size(double.infinity, 48),
+//       ),
+//       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+//         RoundedRectangleBorder(
+//           borderRadius: BorderRadius.circular(48),
+//         ),
+//       ),
+//     ),
+//     child: _buttonContent(widget),
+//   );
+// }
