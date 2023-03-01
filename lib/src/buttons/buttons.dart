@@ -7,9 +7,9 @@ enum IconPosition { none, leading, trailing }
 
 enum ButtonState {
   enabled,
-  hover,
-  focused,
-  pressed,
+  // hover,
+  // focused,
+  // pressed,
   loading,
   disabled,
   skeleton
@@ -185,9 +185,19 @@ class _ButtonBlockState extends State<ButtonBlock> {
   Widget build(BuildContext context) {
     switch (widget.buttonType) {
       case ButtonType.primary:
-        return _primaryButtonBlock(widget);
+        switch (widget.buttonState) {
+          case ButtonState.enabled:
+            return _primaryButtonBlockEnabled(widget);
+          case ButtonState.disabled:
+            return _primaryButtonBlockDisabled(widget);
+          case ButtonState.loading:
+            return _primaryButtonLoading(widget);
+          case ButtonState.skeleton:
+            return _primaryButtonBlockSkeleton(widget);
+        }
       case ButtonType.secondary:
-        return _secondaryButtonBlock(widget);
+        // return _secondaryButtonBlock(widget);
+        return const Placeholder();
       case ButtonType.tertiary:
         return const Placeholder();
       // return _tertiaryButtonBlock();
@@ -204,8 +214,8 @@ class _ButtonBlockState extends State<ButtonBlock> {
   }
 }
 
-// Primary Button Block
-Widget _primaryButtonBlock(ButtonBlock widget) {
+// Primary Button Block Enabled
+Widget _primaryButtonBlockEnabled(ButtonBlock widget) {
   return ElevatedButton(
     onPressed: widget.onPressed,
     style: ButtonStyle(
@@ -243,27 +253,27 @@ Widget _primaryButtonBlock(ButtonBlock widget) {
   );
 }
 
-// Secondary Button Block
-Widget _secondaryButtonBlock(ButtonBlock widget) {
-  return OutlinedButton(
-    onPressed: widget.onPressed,
+// Primary Button Block Disabled
+Widget _primaryButtonBlockDisabled(ButtonBlock widget) {
+  return ElevatedButton(
+    onPressed: null,
     style: ButtonStyle(
       backgroundColor: MaterialStateProperty.all<Color>(
         widget.buttonState == ButtonState.enabled
-            ? MicansColors.grey_20
-            : MicansColors.grey_20,
+            ? MicansColors.grey_30
+            : MicansColors.grey_30,
       ),
       foregroundColor: MaterialStateProperty.all<Color>(
         widget.buttonState == ButtonState.enabled
-            ? MicansColors.grey_100
-            : MicansColors.grey_100,
+            ? MicansColors.grey_50
+            : MicansColors.grey_50,
       ),
       overlayColor: MaterialStateProperty.resolveWith<Color>(
         (Set<MaterialState> states) {
           if (states.contains(MaterialState.pressed)) {
-            return MicansColors.grey_40;
+            return MicansColors.grey_20;
           }
-          return MicansColors.grey_40;
+          return MicansColors.grey_20;
         },
       ),
       padding: MaterialStateProperty.all<EdgeInsets>(
@@ -279,6 +289,103 @@ Widget _secondaryButtonBlock(ButtonBlock widget) {
       ),
     ),
     child: _buttonContent(widget),
+  );
+}
+
+// Primary Button Block Loading
+Widget _primaryButtonLoading(ButtonBlock widget) {
+  return ElevatedButton(
+    onPressed: null,
+    style: ButtonStyle(
+      backgroundColor: MaterialStateProperty.all<Color>(
+        widget.buttonState == ButtonState.enabled
+            ? MicansColors.primary_20
+            : MicansColors.primary_20,
+      ),
+      foregroundColor: MaterialStateProperty.all<Color>(
+        widget.buttonState == ButtonState.enabled
+            ? MicansColors.primary_70
+            : MicansColors.primary_70,
+      ),
+      overlayColor: MaterialStateProperty.resolveWith<Color>(
+        (Set<MaterialState> states) {
+          if (states.contains(MaterialState.pressed)) {
+            return MicansColors.primary_10;
+          }
+          return MicansColors.primary_10;
+        },
+      ),
+      padding: MaterialStateProperty.all<EdgeInsets>(
+        const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+      ),
+      maximumSize: MaterialStateProperty.all<Size>(
+        const Size(double.infinity, 48),
+      ),
+      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(48),
+        ),
+      ),
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const SizedBox(
+          height: 16,
+          width: 16,
+          child: CircularProgressIndicator(
+            strokeWidth: 2,
+            color: MicansColors.grey_10,
+          ),
+        ),
+        const SizedBox(width: 8),
+        Text(widget.text),
+      ],
+    ),
+  );
+}
+
+// Primary Button Block Skeleton
+Widget _primaryButtonBlockSkeleton(ButtonBlock widget) {
+  return ElevatedButton(
+    onPressed: null,
+    style: ButtonStyle(
+      backgroundColor: MaterialStateProperty.all<Color>(
+        widget.buttonState == ButtonState.enabled
+            ? MicansColors.grey_20
+            : MicansColors.grey_20,
+      ),
+      foregroundColor: MaterialStateProperty.all<Color>(
+        widget.buttonState == ButtonState.enabled
+            ? MicansColors.grey_20
+            : MicansColors.grey_20,
+      ),
+      overlayColor: MaterialStateProperty.resolveWith<Color>(
+        (Set<MaterialState> states) {
+          if (states.contains(MaterialState.pressed)) {
+            return MicansColors.grey_20;
+          }
+          return MicansColors.grey_20;
+        },
+      ),
+      padding: MaterialStateProperty.all<EdgeInsets>(
+        const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+      ),
+      maximumSize: MaterialStateProperty.all<Size>(
+        const Size(double.infinity, 48),
+      ),
+      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(48),
+        ),
+      ),
+    ),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: const [
+        Text(''),
+      ],
+    ),
   );
 }
 
