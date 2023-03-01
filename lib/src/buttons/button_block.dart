@@ -154,7 +154,7 @@ class _ButtonBlockState extends State<ButtonBlock> {
       case ButtonType.primary:
         switch (widget.buttonState) {
           case ButtonState.enabled:
-            return _defaultButtonBlockEnabled(
+            return _buttonBlockBuilder(
               widget: widget,
               backgroundColor: MicansColors.primary_60,
               foregroundColor: MicansColors.grey_10,
@@ -165,7 +165,7 @@ class _ButtonBlockState extends State<ButtonBlock> {
               fixedSize: size48,
             );
           case ButtonState.loading:
-            return _defaultButtonBlockEnabled(
+            return _buttonBlockBuilder(
               widget: widget,
               backgroundColor: MicansColors.primary_20,
               foregroundColor: MicansColors.grey_70,
@@ -176,7 +176,7 @@ class _ButtonBlockState extends State<ButtonBlock> {
               fixedSize: size48,
             );
           default:
-            return _defaultButtonBlockEnabled(
+            return _buttonBlockBuilder(
               widget: widget,
               backgroundColor: MicansColors.primary_60,
               foregroundColor: MicansColors.grey_10,
@@ -190,7 +190,7 @@ class _ButtonBlockState extends State<ButtonBlock> {
       case ButtonType.secondary:
         switch (widget.buttonState) {
           case ButtonState.enabled:
-            return _defaultButtonBlockEnabled(
+            return _buttonBlockBuilder(
               widget: widget,
               backgroundColor: MicansColors.grey_20,
               foregroundColor: MicansColors.grey_100,
@@ -201,7 +201,7 @@ class _ButtonBlockState extends State<ButtonBlock> {
               fixedSize: size48,
             );
           case ButtonState.loading:
-            return _defaultButtonBlockEnabled(
+            return _buttonBlockBuilder(
               widget: widget,
               backgroundColor: MicansColors.grey_20,
               foregroundColor: MicansColors.grey_60,
@@ -212,7 +212,7 @@ class _ButtonBlockState extends State<ButtonBlock> {
               fixedSize: size48,
             );
           default:
-            return _defaultButtonBlockEnabled(
+            return _buttonBlockBuilder(
               widget: widget,
               backgroundColor: MicansColors.grey_20,
               foregroundColor: MicansColors.grey_100,
@@ -226,7 +226,7 @@ class _ButtonBlockState extends State<ButtonBlock> {
       case ButtonType.tertiary:
         switch (widget.buttonState) {
           case ButtonState.enabled:
-            return _defaultButtonBlockEnabled(
+            return _buttonBlockBuilder(
               widget: widget,
               backgroundColor: MicansColors.white,
               foregroundColor: MicansColors.primary_70,
@@ -237,7 +237,7 @@ class _ButtonBlockState extends State<ButtonBlock> {
               fixedSize: size48,
             );
           case ButtonState.loading:
-            return _defaultButtonBlockEnabled(
+            return _buttonBlockBuilder(
               widget: widget,
               backgroundColor: MicansColors.white,
               foregroundColor: MicansColors.primary_70,
@@ -248,7 +248,7 @@ class _ButtonBlockState extends State<ButtonBlock> {
               fixedSize: size48,
             );
           default:
-            return _defaultButtonBlockEnabled(
+            return _buttonBlockBuilder(
               widget: widget,
               backgroundColor: MicansColors.white,
               foregroundColor: MicansColors.primary_70,
@@ -262,7 +262,7 @@ class _ButtonBlockState extends State<ButtonBlock> {
       case ButtonType.transparent:
         switch (widget.buttonState) {
           case ButtonState.enabled:
-            return _defaultButtonBlockEnabled(
+            return _buttonBlockBuilder(
               widget: widget,
               backgroundColor: MicansColors.white,
               foregroundColor: MicansColors.primary_70,
@@ -274,7 +274,7 @@ class _ButtonBlockState extends State<ButtonBlock> {
               elevation: 0,
             );
           case ButtonState.loading:
-            return _defaultButtonBlockEnabled(
+            return _buttonBlockBuilder(
               widget: widget,
               backgroundColor: MicansColors.white,
               foregroundColor: MicansColors.primary_60,
@@ -286,7 +286,7 @@ class _ButtonBlockState extends State<ButtonBlock> {
               elevation: 0,
             );
           default:
-            return _defaultButtonBlockEnabled(
+            return _buttonBlockBuilder(
               widget: widget,
               backgroundColor: MicansColors.white,
               foregroundColor: MicansColors.primary_70,
@@ -300,7 +300,7 @@ class _ButtonBlockState extends State<ButtonBlock> {
       case ButtonType.danger:
         switch (widget.buttonState) {
           case ButtonState.enabled:
-            return _defaultButtonBlockEnabled(
+            return _buttonBlockBuilder(
               widget: widget,
               backgroundColor: MicansColors.red_50,
               foregroundColor: MicansColors.white,
@@ -311,7 +311,7 @@ class _ButtonBlockState extends State<ButtonBlock> {
               fixedSize: size48,
             );
           case ButtonState.loading:
-            return _defaultButtonBlockEnabled(
+            return _buttonBlockBuilder(
               widget: widget,
               backgroundColor: MicansColors.red_70,
               foregroundColor: MicansColors.white,
@@ -322,7 +322,7 @@ class _ButtonBlockState extends State<ButtonBlock> {
               fixedSize: size48,
             );
           default:
-            return _defaultButtonBlockEnabled(
+            return _buttonBlockBuilder(
               widget: widget,
               backgroundColor: MicansColors.red_50,
               foregroundColor: MicansColors.white,
@@ -335,7 +335,7 @@ class _ButtonBlockState extends State<ButtonBlock> {
             );
         }
       case ButtonType.disabled:
-        return _defaultButtonBlockEnabled(
+        return _buttonBlockBuilder(
           widget: widget,
           backgroundColor: MicansColors.grey_30,
           foregroundColor: MicansColors.grey_50,
@@ -346,7 +346,7 @@ class _ButtonBlockState extends State<ButtonBlock> {
           fixedSize: size48,
         );
       case ButtonType.skeleton:
-        return _defaultButtonBlockEnabled(
+        return _buttonBlockBuilder(
           widget: widget,
           backgroundColor: MicansColors.grey_30,
           foregroundColor: MicansColors.grey_50,
@@ -361,7 +361,7 @@ class _ButtonBlockState extends State<ButtonBlock> {
 }
 
 // Mother of all button blocks
-Widget _defaultButtonBlockEnabled({
+Widget _buttonBlockBuilder({
   required ButtonBlock widget,
   required Color backgroundColor,
   required Color foregroundColor,
