@@ -543,8 +543,8 @@ _buttonContent(ButtonBlock widget) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          if (widget.icon != null) Expanded(child: Icon(widget.icon)),
-          Expanded(child: Text(widget.text)),
+          if (widget.icon != null) Icon(widget.icon),
+          Text(widget.text),
         ],
       );
     case IconPosition.trailing:
@@ -552,11 +552,11 @@ _buttonContent(ButtonBlock widget) {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(widget.text),
-          if (widget.icon != null) Expanded(child: Icon(widget.icon)),
+          if (widget.icon != null) Icon(widget.icon),
         ],
       );
     case IconPosition.none:
-      return Expanded(child: Text(widget.text));
+      return Text(widget.text);
   }
 }
 
