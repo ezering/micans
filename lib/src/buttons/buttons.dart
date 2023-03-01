@@ -652,40 +652,39 @@ Widget _disabledButtonBlock(ButtonBlock widget) {
 // Skeleton button block
 Widget _skeletonButtonBlock(ButtonBlock widget) {
   return OutlinedButton(
-    onPressed: null,
-    style: ButtonStyle(
-      backgroundColor: MaterialStateProperty.all<Color>(
-        widget.buttonState == ButtonState.enabled
-            ? MicansColors.grey_30
-            : MicansColors.grey_30,
-      ),
-      foregroundColor: MaterialStateProperty.all<Color>(
-        widget.buttonState == ButtonState.enabled
-            ? MicansColors.grey_50
-            : MicansColors.grey_50,
-      ),
-      overlayColor: MaterialStateProperty.resolveWith<Color>(
-        (Set<MaterialState> states) {
-          if (states.contains(MaterialState.pressed)) {
+      onPressed: null,
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all<Color>(
+          widget.buttonState == ButtonState.enabled
+              ? MicansColors.grey_30
+              : MicansColors.grey_30,
+        ),
+        foregroundColor: MaterialStateProperty.all<Color>(
+          widget.buttonState == ButtonState.enabled
+              ? MicansColors.grey_50
+              : MicansColors.grey_50,
+        ),
+        overlayColor: MaterialStateProperty.resolveWith<Color>(
+          (Set<MaterialState> states) {
+            if (states.contains(MaterialState.pressed)) {
+              return MicansColors.grey_40;
+            }
             return MicansColors.grey_40;
-          }
-          return MicansColors.grey_40;
-        },
-      ),
-      padding: MaterialStateProperty.all<EdgeInsets>(
-        const EdgeInsets.symmetric(vertical: size12, horizontal: size16),
-      ),
-      fixedSize: MaterialStateProperty.all<Size>(
-        const Size(double.infinity, size48),
-      ),
-      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-        RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(size48),
+          },
+        ),
+        padding: MaterialStateProperty.all<EdgeInsets>(
+          const EdgeInsets.symmetric(vertical: size12, horizontal: size16),
+        ),
+        fixedSize: MaterialStateProperty.all<Size>(
+          const Size(double.infinity, size48),
+        ),
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(size48),
+          ),
         ),
       ),
-    ),
-    child: _buttonContent(widget),
-  );
+      child: const Text(''));
 }
 
 // Button content
