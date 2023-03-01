@@ -14,7 +14,6 @@ enum ButtonType {
 enum IconPosition { none, leading, trailing }
 
 enum ButtonState { enabled, loading }
-//disabled, skeleton
 
 class ButtonBlock extends StatefulWidget {
   final String text;
@@ -545,19 +544,19 @@ _buttonContent(ButtonBlock widget) {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           if (widget.icon != null) Icon(widget.icon),
-          Text(widget.text),
+          MicansTypography.labelMD(widget.text)
         ],
       );
     case IconPosition.trailing:
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(widget.text),
+          MicansTypography.labelMD(widget.text),
           if (widget.icon != null) Icon(widget.icon),
         ],
       );
     case IconPosition.none:
-      return Text(widget.text);
+      return MicansTypography.labelMD(widget.text);
   }
 }
 
