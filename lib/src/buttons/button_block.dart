@@ -360,7 +360,7 @@ class _ButtonBlockState extends State<ButtonBlock> {
   }
 }
 
-// Primary Button Block Enabled (MicansColors.primary_60, grey_10, primary_80, 48,48 )
+// Mother of all button blocks
 Widget _defaultButtonBlockEnabled({
   required ButtonBlock widget,
   required Color backgroundColor,
@@ -377,7 +377,6 @@ Widget _defaultButtonBlockEnabled({
       style: ButtonStyle(
         elevation: MaterialStateProperty.all<double>(elevation),
         backgroundColor: MaterialStateProperty.all<Color>(
-          // check if button is enabled or loading
           widget.buttonState == ButtonState.enabled
               ? backgroundColor
               : widget.buttonState == ButtonState.loading
@@ -424,7 +423,7 @@ Widget _defaultButtonBlockEnabled({
       child: widget.buttonState == ButtonState.enabled
           ? _buttonContent(widget)
           : widget.buttonState == ButtonState.loading
-              ? _loadingContent(widget, null)
+              ? _loadingContent(widget, foregroundColor)
               : _buttonContent(widget),
     );
 
@@ -455,16 +454,16 @@ _buttonContent(ButtonBlock widget) {
 }
 
 // Loading content
-_loadingContent(ButtonBlock widget, Color? iconCustomColor) {
+_loadingContent(ButtonBlock widget, Color iconCustomColor) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      const SizedBox(
+      SizedBox(
         height: size24,
         width: size24,
         child: CircularProgressIndicator(
           strokeWidth: 2,
-          // color: iconCustomColor,
+          color: iconCustomColor,
         ),
       ),
       const SizedBox(width: size4),
