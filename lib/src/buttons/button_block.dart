@@ -165,7 +165,16 @@ class _ButtonBlockState extends State<ButtonBlock> {
               fixedSize: size48,
             );
           case ButtonState.loading:
-            return _primaryButtonBlockLoading(widget);
+            return _defaultButtonBlockEnabled(
+              widget: widget,
+              backgroundColor: MicansColors.primary_20,
+              foregroundColor: MicansColors.grey_70,
+              overlayColor: MicansColors.primary_30,
+              borderSideColor: null,
+              borderSideWidth: null,
+              borderRadius: size48,
+              fixedSize: size48,
+            );
           default:
             return _defaultButtonBlockEnabled(
               widget: widget,
@@ -331,14 +340,19 @@ Widget _defaultButtonBlockEnabled({
       style: ButtonStyle(
         elevation: MaterialStateProperty.all<double>(elevation),
         backgroundColor: MaterialStateProperty.all<Color>(
+          // check if button is enabled or loading
           widget.buttonState == ButtonState.enabled
               ? backgroundColor
-              : backgroundColor,
+              : widget.buttonState == ButtonState.loading
+                  ? backgroundColor
+                  : backgroundColor,
         ),
         foregroundColor: MaterialStateProperty.all<Color>(
           widget.buttonState == ButtonState.enabled
               ? foregroundColor
-              : foregroundColor,
+              : widget.buttonState == ButtonState.loading
+                  ? foregroundColor
+                  : foregroundColor,
         ),
         side: MaterialStateProperty.all<BorderSide>(
           BorderSide(
@@ -438,7 +452,7 @@ Widget _primaryButtonBlockLoading(ButtonBlock widget) {
           if (states.contains(MaterialState.pressed)) {
             return MicansColors.primary_30;
           }
-          return MicansColors.grey_30;
+          return MicansColors.primary_30;
         },
       ),
       padding: MaterialStateProperty.all<EdgeInsets>(
