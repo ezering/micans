@@ -23,6 +23,17 @@ class ButtonBlock extends StatefulWidget {
   final IconData? icon;
   final Function()? onPressed;
 
+  // make icon required if iconPosition is not none
+  // const ButtonBlock({
+  //   super.key,
+  //   required this.text,
+  //   required this.buttonType,
+  //   required this.buttonState,
+  //   required this.iconPosition,
+  //   this.icon,
+  //   this.onPressed,
+  // }) : assert(iconPosition == IconPosition.none || icon != null);
+
   // ButtonBlock.primaryEnabled
   const ButtonBlock.primaryEnabled({
     super.key,
@@ -31,7 +42,8 @@ class ButtonBlock extends StatefulWidget {
     this.icon,
     this.onPressed,
   })  : buttonType = ButtonType.primary,
-        buttonState = ButtonState.enabled;
+        buttonState = ButtonState.enabled,
+        assert(iconPosition == IconPosition.none || icon != null);
   // ButtonBlock.primaryDisabled
   const ButtonBlock.primaryDisabled({
     super.key,
