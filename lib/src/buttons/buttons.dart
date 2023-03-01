@@ -214,14 +214,14 @@ Widget _primaryButtonBlockEnabled(ButtonBlock widget) {
         },
       ),
       padding: MaterialStateProperty.all<EdgeInsets>(
-        const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        const EdgeInsets.symmetric(vertical: size12, horizontal: size16),
       ),
       maximumSize: MaterialStateProperty.all<Size>(
-        const Size(double.infinity, 48),
+        const Size(double.infinity, size48),
       ),
       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
         RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(48),
+          borderRadius: BorderRadius.circular(size48),
         ),
       ),
     ),
@@ -253,14 +253,14 @@ Widget _primaryButtonBlockLoading(ButtonBlock widget) {
         },
       ),
       padding: MaterialStateProperty.all<EdgeInsets>(
-        const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        const EdgeInsets.symmetric(vertical: size12, horizontal: size16),
       ),
       fixedSize: MaterialStateProperty.all<Size>(
-        const Size(double.infinity, 48),
+        const Size(double.infinity, size48),
       ),
       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
         RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(48),
+          borderRadius: BorderRadius.circular(size48),
         ),
       ),
     ),
@@ -292,14 +292,14 @@ Widget _secondaryButtonBlockEnabled(ButtonBlock widget) {
         },
       ),
       padding: MaterialStateProperty.all<EdgeInsets>(
-        const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        const EdgeInsets.symmetric(vertical: size12, horizontal: size16),
       ),
       fixedSize: MaterialStateProperty.all<Size>(
-        const Size(double.infinity, 48),
+        const Size(double.infinity, size48),
       ),
       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
         RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(48),
+          borderRadius: BorderRadius.circular(size48),
         ),
       ),
     ),
@@ -331,14 +331,14 @@ Widget _secondaryButtonBlockLoading(ButtonBlock widget) {
         },
       ),
       padding: MaterialStateProperty.all<EdgeInsets>(
-        const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        const EdgeInsets.symmetric(vertical: size12, horizontal: size16),
       ),
       fixedSize: MaterialStateProperty.all<Size>(
-        const Size(double.infinity, 48),
+        const Size(double.infinity, size48),
       ),
       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
         RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(48),
+          borderRadius: BorderRadius.circular(size48),
         ),
       ),
     ),
@@ -378,14 +378,14 @@ Widget _tertiaryButtonBlockEnabled(ButtonBlock widget) {
         },
       ),
       padding: MaterialStateProperty.all<EdgeInsets>(
-        const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        const EdgeInsets.symmetric(vertical: size12, horizontal: size16),
       ),
       fixedSize: MaterialStateProperty.all<Size>(
-        const Size(double.infinity, 48),
+        const Size(double.infinity, size48),
       ),
       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
         RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(48),
+          borderRadius: BorderRadius.circular(size48),
         ),
       ),
     ),
@@ -425,14 +425,14 @@ Widget _tertiaryButtonBlockLoading(ButtonBlock widget) {
         },
       ),
       padding: MaterialStateProperty.all<EdgeInsets>(
-        const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        const EdgeInsets.symmetric(vertical: size12, horizontal: size16),
       ),
       fixedSize: MaterialStateProperty.all<Size>(
-        const Size(double.infinity, 48),
+        const Size(double.infinity, size48),
       ),
       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
         RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(48),
+          borderRadius: BorderRadius.circular(size48),
         ),
       ),
     ),
@@ -464,14 +464,14 @@ Widget _disabledButtonBlock(ButtonBlock widget) {
         },
       ),
       padding: MaterialStateProperty.all<EdgeInsets>(
-        const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        const EdgeInsets.symmetric(vertical: size12, horizontal: size16),
       ),
       fixedSize: MaterialStateProperty.all<Size>(
-        const Size(double.infinity, 48),
+        const Size(double.infinity, size48),
       ),
       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
         RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(48),
+          borderRadius: BorderRadius.circular(size48),
         ),
       ),
     ),
@@ -503,14 +503,14 @@ Widget _skeletonButtonBlock(ButtonBlock widget) {
         },
       ),
       padding: MaterialStateProperty.all<EdgeInsets>(
-        const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        const EdgeInsets.symmetric(vertical: size12, horizontal: size16),
       ),
       fixedSize: MaterialStateProperty.all<Size>(
-        const Size(double.infinity, 48),
+        const Size(double.infinity, size48),
       ),
       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
         RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(48),
+          borderRadius: BorderRadius.circular(size48),
         ),
       ),
     ),
@@ -518,8 +518,8 @@ Widget _skeletonButtonBlock(ButtonBlock widget) {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const SizedBox(
-          height: 16,
-          width: 16,
+          height: size16,
+          width: size16,
           child: CircularProgressIndicator(
             strokeWidth: 2,
             color: MicansColors.grey_60,
@@ -527,7 +527,7 @@ Widget _skeletonButtonBlock(ButtonBlock widget) {
         ),
         const SizedBox(width: 8),
         Container(
-          height: 16,
+          height: size16,
           width: 64,
           color: MicansColors.grey_60,
         ),
@@ -544,7 +544,7 @@ _buttonContent(ButtonBlock widget) {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           if (widget.icon != null) Icon(widget.icon, size: 24),
-          const SizedBox(width: 16),
+          const SizedBox(width: size8),
           _textButtonContent(widget),
         ],
       );
@@ -553,7 +553,7 @@ _buttonContent(ButtonBlock widget) {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           _textButtonContent(widget),
-          const SizedBox(width: 16),
+          const SizedBox(width: size8),
           if (widget.icon != null) Icon(widget.icon, size: 24),
         ],
       );
@@ -567,14 +567,14 @@ _loadingContent(ButtonBlock widget, Color iconCustomColor) {
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
       SizedBox(
-        height: 24,
-        width: 24,
+        height: size24,
+        width: size24,
         child: CircularProgressIndicator(
           strokeWidth: 2,
           color: iconCustomColor,
         ),
       ),
-      const SizedBox(width: 16),
+      const SizedBox(width: size8),
       _textButtonContent(widget),
     ],
   );
@@ -585,7 +585,7 @@ _textButtonContent(ButtonBlock widget) {
   return Text(
     widget.text,
     style: const TextStyle(
-      fontSize: 16,
+      fontSize: size16,
       fontWeight: FontWeight.w500,
       height: 1,
     ),
