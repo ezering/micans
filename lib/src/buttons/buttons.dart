@@ -226,7 +226,7 @@ Widget _primaryButtonBlockEnabled(ButtonBlock widget) {
         ),
       ),
     ),
-    child: _buttonContent(widget),
+    child: Expanded(child: _buttonContent(widget)),
   );
 }
 
