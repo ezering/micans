@@ -6,7 +6,7 @@ export 'src/typography/typography.dart';
 export 'src/spacers/spacer.dart';
 
 // buttons
-export 'src/buttons/buttons.dart';
+export 'src/buttons/button_block.dart';
 
 // constants
 export 'src/colors/color.dart';
