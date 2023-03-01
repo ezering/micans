@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:micans/micans.dart';
-import 'package:micans/src/typography/labels.dart';
 
 enum ButtonType {
   primary,
@@ -545,6 +544,7 @@ _buttonContent(ButtonBlock widget) {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           if (widget.icon != null) Icon(widget.icon, size: 24),
+          const MicansSpacer.space1(),
           _textButtonContent(widget),
         ],
       );
@@ -553,6 +553,7 @@ _buttonContent(ButtonBlock widget) {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           _textButtonContent(widget),
+          const MicansSpacer.space1(),
           if (widget.icon != null) Icon(widget.icon, size: 24),
         ],
       );
@@ -573,7 +574,7 @@ _loadingContent(ButtonBlock widget, Color iconCustomColor) {
           color: iconCustomColor,
         ),
       ),
-      const SizedBox(width: 8),
+      const MicansSpacer.space2(),
       _textButtonContent(widget),
     ],
   );
