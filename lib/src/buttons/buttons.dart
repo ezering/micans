@@ -544,7 +544,7 @@ _buttonContent(ButtonBlock widget) {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           if (widget.icon != null) Icon(widget.icon, size: 24),
-          const MicansSpacer.space2(),
+          const MicansSpacer.space6(),
           _textButtonContent(widget),
         ],
       );
