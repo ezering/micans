@@ -244,6 +244,7 @@ class _ButtonBlockState extends State<ButtonBlock> {
               borderSideWidth: null,
               borderRadius: size48,
               fixedSize: size48,
+              elevation: 0,
             );
           case ButtonState.loading:
             return _transparentButtonBlockLoading(widget);
@@ -284,6 +285,7 @@ class _ButtonBlockState extends State<ButtonBlock> {
               borderSideWidth: null,
               borderRadius: size48,
               fixedSize: size48,
+              elevation: 0,
             );
         }
       case ButtonType.disabled:
@@ -322,10 +324,12 @@ Widget _defaultButtonBlockEnabled({
   double? borderSideWidth,
   required double borderRadius,
   required double fixedSize,
+  double elevation = 1.00,
 }) =>
     ElevatedButton(
       onPressed: widget.onPressed,
       style: ButtonStyle(
+        elevation: MaterialStateProperty.all<double>(elevation),
         backgroundColor: MaterialStateProperty.all<Color>(
           widget.buttonState == ButtonState.enabled
               ? backgroundColor
