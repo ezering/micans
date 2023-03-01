@@ -155,130 +155,219 @@ class _ButtonBlockState extends State<ButtonBlock> {
         switch (widget.buttonState) {
           case ButtonState.enabled:
             return _defaultButtonBlockEnabled(
-              widget,
-              MicansColors.primary_60,
-              MicansColors.grey_10,
-              MicansColors.primary_80,
-              null,
-              null,
-              size48,
-              size48,
+              widget: widget,
+              backgroundColor: MicansColors.primary_60,
+              foregroundColor: MicansColors.grey_10,
+              overlayColor: MicansColors.primary_80,
+              borderSideColor: null,
+              borderSideWidth: null,
+              borderRadius: size48,
+              fixedSize: size48,
             );
           case ButtonState.loading:
             return _primaryButtonBlockLoading(widget);
           default:
             return _defaultButtonBlockEnabled(
-              widget,
-              MicansColors.primary_60,
-              MicansColors.grey_10,
-              MicansColors.primary_80,
-              null,
-              null,
-              size48,
-              size48,
+              widget: widget,
+              backgroundColor: MicansColors.primary_60,
+              foregroundColor: MicansColors.grey_10,
+              overlayColor: MicansColors.primary_80,
+              borderSideColor: null,
+              borderSideWidth: null,
+              borderRadius: size48,
+              fixedSize: size48,
             );
         }
       case ButtonType.secondary:
         switch (widget.buttonState) {
           case ButtonState.enabled:
-            return _secondaryButtonBlockEnabled(widget);
+            return _defaultButtonBlockEnabled(
+              widget: widget,
+              backgroundColor: MicansColors.grey_20,
+              foregroundColor: MicansColors.grey_100,
+              overlayColor: MicansColors.primary_40,
+              borderSideColor: null,
+              borderSideWidth: null,
+              borderRadius: size48,
+              fixedSize: size48,
+            );
           case ButtonState.loading:
             return _secondaryButtonBlockLoading(widget);
           default:
-            return _secondaryButtonBlockEnabled(widget);
+            return _defaultButtonBlockEnabled(
+              widget: widget,
+              backgroundColor: MicansColors.grey_20,
+              foregroundColor: MicansColors.grey_100,
+              overlayColor: MicansColors.primary_40,
+              borderSideColor: null,
+              borderSideWidth: null,
+              borderRadius: size48,
+              fixedSize: size48,
+            );
         }
       case ButtonType.tertiary:
         switch (widget.buttonState) {
           case ButtonState.enabled:
-            return _tertiaryButtonBlockEnabled(widget);
+            return _defaultButtonBlockEnabled(
+              widget: widget,
+              backgroundColor: MicansColors.white,
+              foregroundColor: MicansColors.primary_70,
+              overlayColor: MicansColors.grey_30,
+              borderSideColor: MicansColors.primary_70,
+              borderSideWidth: 1.00,
+              borderRadius: size48,
+              fixedSize: size48,
+            );
           case ButtonState.loading:
             return _tertiaryButtonBlockLoading(widget);
           default:
-            return _tertiaryButtonBlockEnabled(widget);
+            return _defaultButtonBlockEnabled(
+              widget: widget,
+              backgroundColor: MicansColors.white,
+              foregroundColor: MicansColors.primary_70,
+              overlayColor: MicansColors.grey_30,
+              borderSideColor: MicansColors.primary_70,
+              borderSideWidth: 1.00,
+              borderRadius: size48,
+              fixedSize: size48,
+            );
         }
       case ButtonType.transparent:
         switch (widget.buttonState) {
           case ButtonState.enabled:
-            return _transparentButtonBlockEnabled(widget);
+            return _defaultButtonBlockEnabled(
+              widget: widget,
+              backgroundColor: MicansColors.white,
+              foregroundColor: MicansColors.primary_70,
+              overlayColor: MicansColors.grey_30,
+              borderSideColor: null,
+              borderSideWidth: null,
+              borderRadius: size48,
+              fixedSize: size48,
+            );
           case ButtonState.loading:
             return _transparentButtonBlockLoading(widget);
           default:
-            return _transparentButtonBlockEnabled(widget);
+            return _defaultButtonBlockEnabled(
+              widget: widget,
+              backgroundColor: MicansColors.white,
+              foregroundColor: MicansColors.primary_70,
+              overlayColor: MicansColors.grey_30,
+              borderSideColor: null,
+              borderSideWidth: null,
+              borderRadius: size48,
+              fixedSize: size48,
+            );
         }
       case ButtonType.danger:
         switch (widget.buttonState) {
           case ButtonState.enabled:
-            return _dangerButtonBlockEnabled(widget);
+            return _defaultButtonBlockEnabled(
+              widget: widget,
+              backgroundColor: MicansColors.red_50,
+              foregroundColor: MicansColors.white,
+              overlayColor: MicansColors.red_70,
+              borderSideColor: null,
+              borderSideWidth: null,
+              borderRadius: size48,
+              fixedSize: size48,
+            );
           case ButtonState.loading:
             return _dangerButtonBlockLoading(widget);
           default:
-            return _dangerButtonBlockEnabled(widget);
+            return _defaultButtonBlockEnabled(
+              widget: widget,
+              backgroundColor: MicansColors.red_50,
+              foregroundColor: MicansColors.white,
+              overlayColor: MicansColors.red_70,
+              borderSideColor: null,
+              borderSideWidth: null,
+              borderRadius: size48,
+              fixedSize: size48,
+            );
         }
       case ButtonType.disabled:
-        return _disabledButtonBlock(widget);
+        return _defaultButtonBlockEnabled(
+          widget: widget,
+          backgroundColor: MicansColors.grey_30,
+          foregroundColor: MicansColors.grey_50,
+          overlayColor: MicansColors.grey_30,
+          borderSideColor: null,
+          borderSideWidth: null,
+          borderRadius: size48,
+          fixedSize: size48,
+        );
       case ButtonType.skeleton:
-        return _skeletonButtonBlock(widget);
+        return _defaultButtonBlockEnabled(
+          widget: widget,
+          backgroundColor: MicansColors.grey_30,
+          foregroundColor: MicansColors.grey_50,
+          overlayColor: MicansColors.grey_40,
+          borderSideColor: null,
+          borderSideWidth: null,
+          borderRadius: size48,
+          fixedSize: size48,
+        );
     }
   }
 }
 
 // Primary Button Block Enabled (MicansColors.primary_60, grey_10, primary_80, 48,48 )
-Widget _defaultButtonBlockEnabled(
-  ButtonBlock widget,
-  Color backgroundColor,
-  Color foregroundColor,
-  Color overlayColor,
+Widget _defaultButtonBlockEnabled({
+  required ButtonBlock widget,
+  required Color backgroundColor,
+  required Color foregroundColor,
+  required Color overlayColor,
   Color? borderSideColor,
   double? borderSideWidth,
-  double borderRadius,
-  double fixedsize,
-) {
-  return ElevatedButton(
-    onPressed: widget.onPressed,
-    style: ButtonStyle(
-      backgroundColor: MaterialStateProperty.all<Color>(
-        widget.buttonState == ButtonState.enabled
-            ? backgroundColor
-            : backgroundColor,
-      ),
-      foregroundColor: MaterialStateProperty.all<Color>(
-        widget.buttonState == ButtonState.enabled
-            ? foregroundColor
-            : foregroundColor,
-      ),
-      side: MaterialStateProperty.all<BorderSide>(
-        BorderSide(
-          color: widget.buttonState == ButtonState.enabled
-              ? borderSideColor ?? Colors.transparent
-              : borderSideColor ?? Colors.transparent,
-          width: widget.buttonState == ButtonState.enabled
-              ? borderSideWidth ?? 0
-              : borderSideWidth ?? 0,
+  required double borderRadius,
+  required double fixedSize,
+}) =>
+    ElevatedButton(
+      onPressed: widget.onPressed,
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all<Color>(
+          widget.buttonState == ButtonState.enabled
+              ? backgroundColor
+              : backgroundColor,
         ),
-      ),
-      overlayColor: MaterialStateProperty.resolveWith<Color>(
-        (Set<MaterialState> states) {
-          if (states.contains(MaterialState.pressed)) {
+        foregroundColor: MaterialStateProperty.all<Color>(
+          widget.buttonState == ButtonState.enabled
+              ? foregroundColor
+              : foregroundColor,
+        ),
+        side: MaterialStateProperty.all<BorderSide>(
+          BorderSide(
+            color: widget.buttonState == ButtonState.enabled
+                ? borderSideColor ?? Colors.transparent
+                : borderSideColor ?? Colors.transparent,
+            width: widget.buttonState == ButtonState.enabled
+                ? borderSideWidth ?? 0
+                : borderSideWidth ?? 0,
+          ),
+        ),
+        overlayColor: MaterialStateProperty.resolveWith<Color>(
+          (Set<MaterialState> states) {
+            if (states.contains(MaterialState.pressed)) {
+              return overlayColor;
+            }
             return overlayColor;
-          }
-          return overlayColor;
-        },
-      ),
-      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-        RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(borderRadius),
+          },
+        ),
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(borderRadius),
+          ),
+        ),
+        padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+          const EdgeInsets.symmetric(
+            vertical: size12,
+            horizontal: size16,
+          ),
         ),
       ),
-      padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-        const EdgeInsets.symmetric(
-          vertical: size12,
-          horizontal: size16,
-        ),
-      ),
-    ),
-    child: _buttonContent(widget),
-  );
-}
+      child: _buttonContent(widget),
+    );
 
 Widget _primaryButtonBlockEnabled(
   ButtonBlock widget,
