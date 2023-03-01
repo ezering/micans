@@ -340,9 +340,9 @@ Widget _secondaryButtonBlockLoading(ButtonBlock widget) {
       overlayColor: MaterialStateProperty.resolveWith<Color>(
         (Set<MaterialState> states) {
           if (states.contains(MaterialState.pressed)) {
-            return MicansColors.grey_40;
+            return MicansColors.grey_60;
           }
-          return MicansColors.grey_40;
+          return MicansColors.grey_60;
         },
       ),
       padding: MaterialStateProperty.all<EdgeInsets>(
@@ -501,9 +501,9 @@ Widget _disabledButtonBlock(ButtonBlock widget) {
       overlayColor: MaterialStateProperty.resolveWith<Color>(
         (Set<MaterialState> states) {
           if (states.contains(MaterialState.pressed)) {
-            return MicansColors.grey_40;
+            return MicansColors.grey_30;
           }
-          return MicansColors.grey_40;
+          return MicansColors.grey_30;
         },
       ),
       padding: MaterialStateProperty.all<EdgeInsets>(
