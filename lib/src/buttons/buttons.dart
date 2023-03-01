@@ -543,20 +543,20 @@ _buttonContent(ButtonBlock widget) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          if (widget.icon != null) Icon(widget.icon),
-          MicansTypography.labelMD(widget.text)
+          if (widget.icon != null) Expanded(child: Icon(widget.icon)),
+          Expanded(child: Text(widget.text)),
         ],
       );
     case IconPosition.trailing:
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          MicansTypography.labelMD(widget.text),
-          if (widget.icon != null) Icon(widget.icon),
+          Text(widget.text),
+          if (widget.icon != null) Expanded(child: Icon(widget.icon)),
         ],
       );
     case IconPosition.none:
-      return MicansTypography.labelMD(widget.text);
+      return Expanded(child: Text(widget.text));
   }
 }
 
