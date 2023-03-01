@@ -684,25 +684,7 @@ Widget _skeletonButtonBlock(ButtonBlock widget) {
         ),
       ),
     ),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const SizedBox(
-          height: size16,
-          width: size16,
-          child: CircularProgressIndicator(
-            strokeWidth: 2,
-            color: MicansColors.grey_60,
-          ),
-        ),
-        const SizedBox(width: 8),
-        Container(
-          height: size16,
-          width: 64,
-          color: MicansColors.grey_60,
-        ),
-      ],
-    ),
+    child: _buttonContent(widget),
   );
 }
 
