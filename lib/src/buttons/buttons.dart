@@ -246,6 +246,7 @@ _buttonContent(ButtonBlock widget) {
   switch (widget.iconPosition) {
     case IconPosition.leading:
       return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           if (widget.icon != null) Icon(widget.icon),
           Text(widget.text),
@@ -253,6 +254,7 @@ _buttonContent(ButtonBlock widget) {
       );
     case IconPosition.trailing:
       return Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(widget.text),
           if (widget.icon != null) Icon(widget.icon),
