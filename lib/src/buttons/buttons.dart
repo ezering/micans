@@ -543,7 +543,7 @@ _buttonContent(ButtonBlock widget) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          if (widget.icon != null) Icon(widget.icon, size: 24),
+          if (widget.icon != null) Icon(widget.icon, size: size24),
           const SizedBox(width: size8),
           _textButtonContent(widget),
         ],
@@ -554,7 +554,7 @@ _buttonContent(ButtonBlock widget) {
         children: [
           _textButtonContent(widget),
           const SizedBox(width: size8),
-          if (widget.icon != null) Icon(widget.icon, size: 24),
+          if (widget.icon != null) Icon(widget.icon, size: size24),
         ],
       );
     case IconPosition.none:
