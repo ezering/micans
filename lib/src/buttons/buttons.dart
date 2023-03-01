@@ -236,12 +236,12 @@ Widget _primaryButtonBlockLoading(ButtonBlock widget) {
     onPressed: null,
     style: ButtonStyle(
       backgroundColor: MaterialStateProperty.all<Color>(
-        widget.buttonState == ButtonState.enabled
+        widget.buttonState == ButtonState.loading
             ? MicansColors.primary_20
             : MicansColors.primary_20,
       ),
       foregroundColor: MaterialStateProperty.all<Color>(
-        widget.buttonState == ButtonState.enabled
+        widget.buttonState == ButtonState.loading
             ? MicansColors.primary_70
             : MicansColors.primary_70,
       ),
@@ -328,12 +328,12 @@ Widget _secondaryButtonBlockLoading(ButtonBlock widget) {
     onPressed: null,
     style: ButtonStyle(
       backgroundColor: MaterialStateProperty.all<Color>(
-        widget.buttonState == ButtonState.enabled
+        widget.buttonState == ButtonState.loading
             ? MicansColors.grey_20
             : MicansColors.grey_20,
       ),
       foregroundColor: MaterialStateProperty.all<Color>(
-        widget.buttonState == ButtonState.enabled
+        widget.buttonState == ButtonState.loading
             ? MicansColors.grey_60
             : MicansColors.grey_60,
       ),
@@ -428,20 +428,20 @@ Widget _tertiaryButtonBlockLoading(ButtonBlock widget) {
     onPressed: null,
     style: ButtonStyle(
       backgroundColor: MaterialStateProperty.all<Color>(
-        widget.buttonState == ButtonState.enabled
+        widget.buttonState == ButtonState.loading
             ? MicansColors.white
             : MicansColors.white,
       ),
       side: MaterialStateProperty.all<BorderSide>(
         BorderSide(
-          color: widget.buttonState == ButtonState.enabled
+          color: widget.buttonState == ButtonState.loading
               ? MicansColors.primary_60
               : MicansColors.primary_60,
           width: 1,
         ),
       ),
       foregroundColor: MaterialStateProperty.all<Color>(
-        widget.buttonState == ButtonState.enabled
+        widget.buttonState == ButtonState.loading
             ? MicansColors.primary_70
             : MicansColors.primary_70,
       ),
