@@ -142,7 +142,7 @@ class ButtonBlock extends StatefulWidget {
       this.icon,
       this.onPressed,
       this.buttonState})
-      : buttonType = ButtonType.primary;
+      : buttonType = ButtonType.disabled;
 
   @override
   State<ButtonBlock> createState() => _ButtonBlockState();
