@@ -38,11 +38,11 @@ class ButtonBlock extends StatefulWidget {
   const ButtonBlock.primaryLoading({
     super.key,
     required this.text,
-    required this.iconPosition,
-    this.icon,
     this.onPressed,
   })  : buttonType = ButtonType.primary,
-        buttonState = ButtonState.loading;
+        buttonState = ButtonState.loading,
+        icon = null,
+        iconPosition = IconPosition.none;
 
   // ButtonBlock.secondaryEnabled
   const ButtonBlock.secondaryEnabled({
@@ -58,11 +58,11 @@ class ButtonBlock extends StatefulWidget {
   const ButtonBlock.secondaryLoading({
     super.key,
     required this.text,
-    required this.iconPosition,
-    this.icon,
     this.onPressed,
   })  : buttonType = ButtonType.secondary,
-        buttonState = ButtonState.loading;
+        buttonState = ButtonState.loading,
+        icon = null,
+        iconPosition = IconPosition.none;
 
   // ButtonBlock.tertiaryEnabled
   const ButtonBlock.tertiaryEnabled({
@@ -78,11 +78,11 @@ class ButtonBlock extends StatefulWidget {
   const ButtonBlock.tertiaryLoading({
     super.key,
     required this.text,
-    required this.iconPosition,
-    this.icon,
     this.onPressed,
   })  : buttonType = ButtonType.tertiary,
-        buttonState = ButtonState.loading;
+        buttonState = ButtonState.loading,
+        icon = null,
+        iconPosition = IconPosition.none;
 
   // ButtonBlock.transparentEnabled
   const ButtonBlock.transparentEnabled({
@@ -98,11 +98,11 @@ class ButtonBlock extends StatefulWidget {
   const ButtonBlock.transparentLoading({
     super.key,
     required this.text,
-    required this.iconPosition,
-    this.icon,
     this.onPressed,
   })  : buttonType = ButtonType.transparent,
-        buttonState = ButtonState.loading;
+        buttonState = ButtonState.loading,
+        icon = null,
+        iconPosition = IconPosition.none;
 
   // ButtonBlock.dangerEnabled
   const ButtonBlock.dangerEnabled({
@@ -118,11 +118,11 @@ class ButtonBlock extends StatefulWidget {
   const ButtonBlock.dangerLoading({
     super.key,
     required this.text,
-    required this.iconPosition,
-    this.icon,
     this.onPressed,
   })  : buttonType = ButtonType.danger,
-        buttonState = ButtonState.loading;
+        buttonState = ButtonState.loading,
+        icon = null,
+        iconPosition = IconPosition.none;
 
   // ButtonBlock.skeleton
   const ButtonBlock.skeleton(
@@ -265,21 +265,7 @@ Widget _primaryButtonBlockLoading(ButtonBlock widget) {
         ),
       ),
     ),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const SizedBox(
-          height: 16,
-          width: 16,
-          child: CircularProgressIndicator(
-            strokeWidth: 2,
-            color: MicansColors.primary_70,
-          ),
-        ),
-        const SizedBox(width: 8),
-        Text(widget.text),
-      ],
-    ),
+    child: _loadingContent(widget, MicansColors.primary_70),
   );
 }
 
@@ -357,21 +343,7 @@ Widget _secondaryButtonBlockLoading(ButtonBlock widget) {
         ),
       ),
     ),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const SizedBox(
-          height: 16,
-          width: 16,
-          child: CircularProgressIndicator(
-            strokeWidth: 2,
-            color: MicansColors.grey_60,
-          ),
-        ),
-        const SizedBox(width: 8),
-        Text(widget.text),
-      ],
-    ),
+    child: _loadingContent(widget, MicansColors.grey_60),
   );
 }
 
@@ -465,21 +437,7 @@ Widget _tertiaryButtonBlockLoading(ButtonBlock widget) {
         ),
       ),
     ),
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        const SizedBox(
-          height: 16,
-          width: 16,
-          child: CircularProgressIndicator(
-            strokeWidth: 2,
-            color: MicansColors.primary_60,
-          ),
-        ),
-        const SizedBox(width: 8),
-        Text(widget.text),
-      ],
-    ),
+    child: _loadingContent(widget, MicansColors.primary_60),
   );
 }
 
@@ -601,6 +559,24 @@ _buttonContent(ButtonBlock widget) {
     case IconPosition.none:
       return Text(widget.text);
   }
+}
+
+_loadingContent(ButtonBlock widget, Color iconCustomColor) {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      SizedBox(
+        height: 16,
+        width: 16,
+        child: CircularProgressIndicator(
+          strokeWidth: 2,
+          color: iconCustomColor,
+        ),
+      ),
+      const SizedBox(width: 8),
+      Text(widget.text),
+    ],
+  );
 }
 
 
