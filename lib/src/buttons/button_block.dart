@@ -384,7 +384,11 @@ Widget _defaultButtonBlockEnabled({
           ),
         ),
       ),
-      child: _buttonContent(widget),
+      child: widget.buttonState == ButtonState.enabled
+          ? _buttonContent(widget)
+          : widget.buttonState == ButtonState.loading
+              ? _loadingContent(widget, null)
+              : _buttonContent(widget),
     );
 
 Widget _primaryButtonBlockEnabled(
@@ -903,16 +907,16 @@ _buttonContent(ButtonBlock widget) {
 }
 
 // Loading content
-_loadingContent(ButtonBlock widget, Color iconCustomColor) {
+_loadingContent(ButtonBlock widget, Color? iconCustomColor) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      SizedBox(
+      const SizedBox(
         height: size24,
         width: size24,
         child: CircularProgressIndicator(
           strokeWidth: 2,
-          color: iconCustomColor,
+          // color: iconCustomColor,
         ),
       ),
       const SizedBox(width: size4),
