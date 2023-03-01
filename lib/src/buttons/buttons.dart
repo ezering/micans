@@ -540,8 +540,8 @@ Widget _skeletonButtonBlock(ButtonBlock widget) {
 _buttonContent(ButtonBlock widget) {
   switch (widget.iconPosition) {
     case IconPosition.leading:
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+      return Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
         children: [
           if (widget.icon != null) Icon(widget.icon, size: size24),
           const SizedBox(width: size4),
@@ -549,8 +549,8 @@ _buttonContent(ButtonBlock widget) {
         ],
       );
     case IconPosition.trailing:
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+      return Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
         children: [
           _textButtonContent(widget),
           const SizedBox(width: size4),
@@ -562,6 +562,7 @@ _buttonContent(ButtonBlock widget) {
   }
 }
 
+// Loading content
 _loadingContent(ButtonBlock widget, Color iconCustomColor) {
   return Row(
     mainAxisAlignment: MainAxisAlignment.center,
