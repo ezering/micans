@@ -418,47 +418,45 @@ Widget _buttonBlockBuilder({
   required double fixedSize,
   double elevation = 1.00,
 }) =>
-    Expanded(
-      child: ElevatedButton(
-        onPressed: widget.onPressed,
-        style: ButtonStyle(
-          elevation: MaterialStateProperty.all<double>(elevation),
-          fixedSize: MaterialStateProperty.all<Size>(
-              Size(double.maxFinite, fixedSize)),
-          backgroundColor: MaterialStateProperty.all<Color>(backgroundColor),
-          foregroundColor: MaterialStateProperty.all<Color>(foregroundColor),
-          side: MaterialStateProperty.all<BorderSide>(
-            BorderSide(
-              color: borderSideColor ?? Colors.transparent,
-              width: borderSideWidth ?? 0,
-            ),
-          ),
-          overlayColor: MaterialStateProperty.resolveWith<Color>(
-            (Set<MaterialState> states) {
-              if (states.contains(MaterialState.pressed)) {
-                return overlayColor;
-              }
-              return overlayColor;
-            },
-          ),
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(buttonBorderRadius!.value),
-            ),
-          ),
-          padding: MaterialStateProperty.all<EdgeInsets>(
-            const EdgeInsets.symmetric(
-              horizontal: size16,
-              vertical: size12,
-            ),
+    ElevatedButton(
+      onPressed: widget.onPressed,
+      style: ButtonStyle(
+        elevation: MaterialStateProperty.all<double>(elevation),
+        fixedSize:
+            MaterialStateProperty.all<Size>(Size(double.maxFinite, fixedSize)),
+        backgroundColor: MaterialStateProperty.all<Color>(backgroundColor),
+        foregroundColor: MaterialStateProperty.all<Color>(foregroundColor),
+        side: MaterialStateProperty.all<BorderSide>(
+          BorderSide(
+            color: borderSideColor ?? Colors.transparent,
+            width: borderSideWidth ?? 0,
           ),
         ),
-        child: widget.buttonState == ButtonState.enabled
-            ? _buttonContent(widget)
-            : widget.buttonState == ButtonState.loading
-                ? _loadingContent(widget, foregroundColor)
-                : _buttonContent(widget),
+        overlayColor: MaterialStateProperty.resolveWith<Color>(
+          (Set<MaterialState> states) {
+            if (states.contains(MaterialState.pressed)) {
+              return overlayColor;
+            }
+            return overlayColor;
+          },
+        ),
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(buttonBorderRadius!.value),
+          ),
+        ),
+        padding: MaterialStateProperty.all<EdgeInsets>(
+          const EdgeInsets.symmetric(
+            horizontal: size16,
+            vertical: size12,
+          ),
+        ),
       ),
+      child: widget.buttonState == ButtonState.enabled
+          ? _buttonContent(widget)
+          : widget.buttonState == ButtonState.loading
+              ? _loadingContent(widget, foregroundColor)
+              : _buttonContent(widget),
     );
 
 // Button content
