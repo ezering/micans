@@ -25,6 +25,19 @@ enum ButtonBorderRadius<double> {
   const ButtonBorderRadius(this.value);
 }
 
+enum IconSize<double> {
+  sm(size16),
+  md(size24),
+  lg(size32),
+  xl(size40),
+  xxl(size48),
+  xxxl(size56),
+  xxxxl(size64);
+
+  final double value;
+  const IconSize(this.value);
+}
+
 enum IconPosition { none, leading, trailing }
 
 enum ButtonState { enabled, loading }
@@ -37,6 +50,17 @@ class ButtonBlock extends StatefulWidget {
   final IconPosition iconPosition;
   final IconData? icon;
   final Function()? onPressed;
+
+  const ButtonBlock({
+    super.key,
+    required this.buttonType,
+    this.buttonState,
+    required this.text,
+    this.buttonBorderRadius,
+    required this.iconPosition,
+    this.icon,
+    this.onPressed,
+  });
 
   // ButtonBlock.primaryEnabled
   const ButtonBlock.primaryEnabled({
