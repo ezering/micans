@@ -448,7 +448,7 @@ Widget _buttonBlockBuilder({
         padding: MaterialStateProperty.all<EdgeInsets>(
           const EdgeInsets.symmetric(
             horizontal: size16,
-            vertical: size8,
+            vertical: size12,
           ),
         ),
       ),
