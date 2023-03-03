@@ -445,6 +445,12 @@ Widget _buttonBlockBuilder({
             borderRadius: BorderRadius.circular(buttonBorderRadius!.value),
           ),
         ),
+        padding: MaterialStateProperty.all<EdgeInsets>(
+          const EdgeInsets.symmetric(
+            horizontal: size16,
+            vertical: size8,
+          ),
+        ),
       ),
       child: widget.buttonState == ButtonState.enabled
           ? _buttonContent(widget)
