@@ -25,18 +25,7 @@ enum ButtonBorderRadius<double> {
   const ButtonBorderRadius(this.value);
 }
 
-enum IconSize<double> {
-  sm(size16),
-  md(size24),
-  lg(size32),
-  xl(size40),
-  xxl(size48),
-  xxxl(size56),
-  xxxxl(size64);
-
-  final double value;
-  const IconSize(this.value);
-}
+enum IconSize { sm, md, lg, xl, xxl, xxxl }
 
 enum IconPosition { none, leading, trailing }
 
@@ -51,16 +40,115 @@ class ButtonBlock extends StatefulWidget {
   final IconData? icon;
   final Function()? onPressed;
 
-  const ButtonBlock({
+  // ButtonBlock.primaryEnabled
+  const ButtonBlock.primaryEnabled({
     super.key,
-    required this.buttonType,
-    this.buttonState,
-    required this.text,
     this.buttonBorderRadius,
+    required this.text,
     required this.iconPosition,
     this.icon,
     this.onPressed,
-  });
+  })  : buttonType = ButtonType.primary,
+        buttonState = ButtonState.enabled;
+
+  // ButtonBlock.primaryLoading
+  const ButtonBlock.primaryLoading({
+    super.key,
+    this.buttonBorderRadius,
+    required this.text,
+    this.onPressed,
+  })  : buttonType = ButtonType.primary,
+        buttonState = ButtonState.loading,
+        icon = null,
+        iconPosition = IconPosition.none;
+
+  // ButtonBlock.secondaryEnabled
+  const ButtonBlock.secondaryEnabled({
+    super.key,
+    this.buttonBorderRadius,
+    required this.text,
+    required this.iconPosition,
+    this.icon,
+    this.onPressed,
+  })  : buttonType = ButtonType.secondary,
+        buttonState = ButtonState.enabled;
+
+  // ButtonBlock.secondaryLoading
+  const ButtonBlock.secondaryLoading({
+    super.key,
+    this.buttonBorderRadius,
+    required this.text,
+    this.onPressed,
+  })  : buttonType = ButtonType.secondary,
+        buttonState = ButtonState.loading,
+        icon = null,
+        iconPosition = IconPosition.none;
+
+  // ButtonBlock.tertiaryEnabled
+  const ButtonBlock.tertiaryEnabled({
+    super.key,
+    this.buttonBorderRadius,
+    required this.text,
+    required this.iconPosition,
+    this.icon,
+    this.onPressed,
+  })  : buttonType = ButtonType.tertiary,
+        buttonState = ButtonState.enabled;
+
+  // ButtonBlock.tertiaryLoading
+  const ButtonBlock.tertiaryLoading({
+    super.key,
+    this.buttonBorderRadius,
+    required this.text,
+    this.onPressed,
+  })  : buttonType = ButtonType.tertiary,
+        buttonState = ButtonState.loading,
+        icon = null,
+        iconPosition = IconPosition.none;
+
+  // ButtonBlock.transparentEnabled
+  const ButtonBlock.transparentEnabled({
+    super.key,
+    this.buttonBorderRadius,
+    required this.text,
+    required this.iconPosition,
+    this.icon,
+    this.onPressed,
+  })  : buttonType = ButtonType.transparent,
+        buttonState = ButtonState.enabled;
+
+  // ButtonBlock.transparentLoading
+  const ButtonBlock.transparentLoading({
+    super.key,
+    this.buttonBorderRadius,
+    required this.text,
+    this.onPressed,
+  })  : buttonType = ButtonType.transparent,
+        buttonState = ButtonState.loading,
+        icon = null,
+        iconPosition = IconPosition.none;
+
+  // ButtonBlock.dangerEnabled
+  const ButtonBlock.dangerEnabled({
+    super.key,
+    this.buttonBorderRadius,
+    required this.text,
+    required this.iconPosition,
+    this.icon,
+    this.onPressed,
+  })  : buttonType = ButtonType.danger,
+        buttonState = ButtonState.enabled;
+
+  // ButtonBlock.dangerLoading
+  const ButtonBlock.dangerLoading({
+    super.key,
+    this.buttonBorderRadius,
+    required this.text,
+    this.onPressed,
+  })  : buttonType = ButtonType.danger,
+        buttonState = ButtonState.loading,
+        icon = null,
+        iconPosition = IconPosition.none;
 
   // ButtonBlock.skeleton
   const ButtonBlock.skeleton({
@@ -334,15 +422,28 @@ Widget _buttonBlockBuilder({
       onPressed: widget.onPressed,
       style: ButtonStyle(
         elevation: MaterialStateProperty.all<double>(elevation),
-        fixedSize: MaterialStateProperty.all<Size>(
-          Size(double.infinity, fixedSize),
+        backgroundColor: MaterialStateProperty.all<Color>(
+          widget.buttonState == ButtonState.enabled
+              ? backgroundColor
+              : widget.buttonState == ButtonState.loading
+                  ? backgroundColor
+                  : backgroundColor,
         ),
-        backgroundColor: MaterialStateProperty.all<Color>(backgroundColor),
-        foregroundColor: MaterialStateProperty.all<Color>(foregroundColor),
+        foregroundColor: MaterialStateProperty.all<Color>(
+          widget.buttonState == ButtonState.enabled
+              ? foregroundColor
+              : widget.buttonState == ButtonState.loading
+                  ? foregroundColor
+                  : foregroundColor,
+        ),
         side: MaterialStateProperty.all<BorderSide>(
           BorderSide(
-            color: borderSideColor ?? Colors.transparent,
-            width: borderSideWidth ?? 0,
+            color: widget.buttonState == ButtonState.enabled
+                ? borderSideColor ?? Colors.transparent
+                : borderSideColor ?? Colors.transparent,
+            width: widget.buttonState == ButtonState.enabled
+                ? borderSideWidth ?? 0
+                : borderSideWidth ?? 0,
           ),
         ),
         overlayColor: MaterialStateProperty.resolveWith<Color>(
@@ -356,6 +457,12 @@ Widget _buttonBlockBuilder({
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(buttonBorderRadius!.value),
+          ),
+        ),
+        padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+          const EdgeInsets.symmetric(
+            vertical: size12,
+            horizontal: size16,
           ),
         ),
       ),
@@ -421,13 +528,4 @@ _textButtonContent(ButtonBlock widget) {
       height: 1,
     ),
   );
-}
-
-Color _getBackgroundColor(ButtonState buttonState) {
-  switch (buttonState) {
-    case ButtonState.enabled:
-      return MicansColors.blue_50;
-    case ButtonState.loading:
-      return MicansColors.blue_70;
-  }
 }
