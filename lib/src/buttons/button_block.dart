@@ -464,6 +464,7 @@ _buttonContent(ButtonBlock widget) {
   switch (widget.iconPosition) {
     case IconPosition.leading:
       return Wrap(
+        crossAxisAlignment: WrapCrossAlignment.center,
         children: [
           if (widget.icon != null) Icon(widget.icon, size: size24),
           const SizedBox(width: size4),
