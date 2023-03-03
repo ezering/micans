@@ -444,6 +444,9 @@ Widget _buttonBlockBuilder({
       onPressed: widget.onPressed,
       style: ButtonStyle(
         elevation: MaterialStateProperty.all<double>(elevation),
+        fixedSize: MaterialStateProperty.all<Size>(
+          Size(double.infinity, fixedSize),
+        ),
         backgroundColor: MaterialStateProperty.all<Color>(
           widget.buttonState == ButtonState.enabled
               ? backgroundColor
