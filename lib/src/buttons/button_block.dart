@@ -422,28 +422,12 @@ Widget _buttonBlockBuilder({
       onPressed: widget.onPressed,
       style: ButtonStyle(
         elevation: MaterialStateProperty.all<double>(elevation),
-        backgroundColor: MaterialStateProperty.all<Color>(
-          widget.buttonState == ButtonState.enabled
-              ? backgroundColor
-              : widget.buttonState == ButtonState.loading
-                  ? backgroundColor
-                  : backgroundColor,
-        ),
-        foregroundColor: MaterialStateProperty.all<Color>(
-          widget.buttonState == ButtonState.enabled
-              ? foregroundColor
-              : widget.buttonState == ButtonState.loading
-                  ? foregroundColor
-                  : foregroundColor,
-        ),
+        backgroundColor: MaterialStateProperty.all<Color>(backgroundColor),
+        foregroundColor: MaterialStateProperty.all<Color>(foregroundColor),
         side: MaterialStateProperty.all<BorderSide>(
           BorderSide(
-            color: widget.buttonState == ButtonState.enabled
-                ? borderSideColor ?? Colors.transparent
-                : borderSideColor ?? Colors.transparent,
-            width: widget.buttonState == ButtonState.enabled
-                ? borderSideWidth ?? 0
-                : borderSideWidth ?? 0,
+            color: borderSideColor ?? Colors.transparent,
+            width: borderSideWidth ?? 0,
           ),
         ),
         overlayColor: MaterialStateProperty.resolveWith<Color>(
@@ -459,12 +443,6 @@ Widget _buttonBlockBuilder({
             borderRadius: BorderRadius.circular(buttonBorderRadius!.value),
           ),
         ),
-        padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-          const EdgeInsets.symmetric(
-            vertical: size12,
-            horizontal: size16,
-          ),
-        ),
       ),
       child: widget.buttonState == ButtonState.enabled
           ? _buttonContent(widget)
@@ -478,7 +456,7 @@ _buttonContent(ButtonBlock widget) {
   switch (widget.iconPosition) {
     case IconPosition.leading:
       return Wrap(
-        crossAxisAlignment: WrapCrossAlignment.center,
+        crossAxisAlignment: WrapCrossAlignment.start,
         children: [
           if (widget.icon != null) Icon(widget.icon, size: size24),
           const SizedBox(width: size4),
