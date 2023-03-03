@@ -11,6 +11,20 @@ enum ButtonType {
   disabled
 }
 
+enum ButtonBorderRadius<double> {
+  none(0.00),
+  sm(size4),
+  md(size8),
+  lg(size12),
+  xl(size16),
+  xxl(size24),
+  xxxl(size32),
+  rounded(size48);
+
+  final double value;
+  const ButtonBorderRadius(this.value);
+}
+
 enum IconPosition { none, leading, trailing }
 
 enum ButtonState { enabled, loading }
@@ -18,6 +32,7 @@ enum ButtonState { enabled, loading }
 class ButtonBlock extends StatefulWidget {
   final String text;
   final ButtonType buttonType;
+  final ButtonBorderRadius<double>? buttonBorderRadius;
   final ButtonState? buttonState;
   final IconPosition iconPosition;
   final IconData? icon;
@@ -26,6 +41,7 @@ class ButtonBlock extends StatefulWidget {
   // ButtonBlock.primaryEnabled
   const ButtonBlock.primaryEnabled({
     super.key,
+    this.buttonBorderRadius,
     required this.text,
     required this.iconPosition,
     this.icon,
@@ -36,6 +52,7 @@ class ButtonBlock extends StatefulWidget {
   // ButtonBlock.primaryLoading
   const ButtonBlock.primaryLoading({
     super.key,
+    this.buttonBorderRadius,
     required this.text,
     this.onPressed,
   })  : buttonType = ButtonType.primary,
@@ -46,6 +63,7 @@ class ButtonBlock extends StatefulWidget {
   // ButtonBlock.secondaryEnabled
   const ButtonBlock.secondaryEnabled({
     super.key,
+    this.buttonBorderRadius,
     required this.text,
     required this.iconPosition,
     this.icon,
@@ -56,6 +74,7 @@ class ButtonBlock extends StatefulWidget {
   // ButtonBlock.secondaryLoading
   const ButtonBlock.secondaryLoading({
     super.key,
+    this.buttonBorderRadius,
     required this.text,
     this.onPressed,
   })  : buttonType = ButtonType.secondary,
@@ -66,6 +85,7 @@ class ButtonBlock extends StatefulWidget {
   // ButtonBlock.tertiaryEnabled
   const ButtonBlock.tertiaryEnabled({
     super.key,
+    this.buttonBorderRadius,
     required this.text,
     required this.iconPosition,
     this.icon,
@@ -76,6 +96,7 @@ class ButtonBlock extends StatefulWidget {
   // ButtonBlock.tertiaryLoading
   const ButtonBlock.tertiaryLoading({
     super.key,
+    this.buttonBorderRadius,
     required this.text,
     this.onPressed,
   })  : buttonType = ButtonType.tertiary,
@@ -86,6 +107,7 @@ class ButtonBlock extends StatefulWidget {
   // ButtonBlock.transparentEnabled
   const ButtonBlock.transparentEnabled({
     super.key,
+    this.buttonBorderRadius,
     required this.text,
     required this.iconPosition,
     this.icon,
@@ -96,6 +118,7 @@ class ButtonBlock extends StatefulWidget {
   // ButtonBlock.transparentLoading
   const ButtonBlock.transparentLoading({
     super.key,
+    this.buttonBorderRadius,
     required this.text,
     this.onPressed,
   })  : buttonType = ButtonType.transparent,
@@ -106,6 +129,7 @@ class ButtonBlock extends StatefulWidget {
   // ButtonBlock.dangerEnabled
   const ButtonBlock.dangerEnabled({
     super.key,
+    this.buttonBorderRadius,
     required this.text,
     required this.iconPosition,
     this.icon,
@@ -116,6 +140,7 @@ class ButtonBlock extends StatefulWidget {
   // ButtonBlock.dangerLoading
   const ButtonBlock.dangerLoading({
     super.key,
+    this.buttonBorderRadius,
     required this.text,
     this.onPressed,
   })  : buttonType = ButtonType.danger,
@@ -124,24 +149,26 @@ class ButtonBlock extends StatefulWidget {
         iconPosition = IconPosition.none;
 
   // ButtonBlock.skeleton
-  const ButtonBlock.skeleton(
-      {super.key,
-      required this.text,
-      required this.iconPosition,
-      this.icon,
-      this.onPressed,
-      this.buttonState})
-      : buttonType = ButtonType.skeleton;
+  const ButtonBlock.skeleton({
+    super.key,
+    this.buttonBorderRadius,
+    required this.text,
+    required this.iconPosition,
+    this.icon,
+    this.onPressed,
+    this.buttonState,
+  }) : buttonType = ButtonType.skeleton;
 
   // ButtonBlock.Disabled
-  const ButtonBlock.disabled(
-      {super.key,
-      required this.text,
-      required this.iconPosition,
-      this.icon,
-      this.onPressed,
-      this.buttonState})
-      : buttonType = ButtonType.disabled;
+  const ButtonBlock.disabled({
+    super.key,
+    this.buttonBorderRadius,
+    required this.text,
+    required this.iconPosition,
+    this.icon,
+    this.onPressed,
+    this.buttonState,
+  }) : buttonType = ButtonType.disabled;
 
   @override
   State<ButtonBlock> createState() => _ButtonBlockState();
@@ -161,7 +188,8 @@ class _ButtonBlockState extends State<ButtonBlock> {
               overlayColor: MicansColors.primary_80,
               borderSideColor: null,
               borderSideWidth: null,
-              borderRadius: size48,
+              buttonBorderRadius:
+                  widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
               fixedSize: size48,
             );
           case ButtonState.loading:
@@ -172,7 +200,8 @@ class _ButtonBlockState extends State<ButtonBlock> {
               overlayColor: MicansColors.primary_30,
               borderSideColor: null,
               borderSideWidth: null,
-              borderRadius: size48,
+              buttonBorderRadius:
+                  widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
               fixedSize: size48,
             );
           default:
@@ -183,7 +212,8 @@ class _ButtonBlockState extends State<ButtonBlock> {
               overlayColor: MicansColors.primary_80,
               borderSideColor: null,
               borderSideWidth: null,
-              borderRadius: size48,
+              buttonBorderRadius:
+                  widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
               fixedSize: size48,
             );
         }
@@ -197,7 +227,8 @@ class _ButtonBlockState extends State<ButtonBlock> {
               overlayColor: MicansColors.primary_40,
               borderSideColor: null,
               borderSideWidth: null,
-              borderRadius: size48,
+              buttonBorderRadius:
+                  widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
               fixedSize: size48,
             );
           case ButtonState.loading:
@@ -208,7 +239,8 @@ class _ButtonBlockState extends State<ButtonBlock> {
               overlayColor: MicansColors.grey_60,
               borderSideColor: null,
               borderSideWidth: null,
-              borderRadius: size48,
+              buttonBorderRadius:
+                  widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
               fixedSize: size48,
             );
           default:
@@ -219,7 +251,8 @@ class _ButtonBlockState extends State<ButtonBlock> {
               overlayColor: MicansColors.primary_40,
               borderSideColor: null,
               borderSideWidth: null,
-              borderRadius: size48,
+              buttonBorderRadius:
+                  widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
               fixedSize: size48,
             );
         }
@@ -233,7 +266,8 @@ class _ButtonBlockState extends State<ButtonBlock> {
               overlayColor: MicansColors.grey_30,
               borderSideColor: MicansColors.primary_70,
               borderSideWidth: 1.00,
-              borderRadius: size48,
+              buttonBorderRadius:
+                  widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
               fixedSize: size48,
             );
           case ButtonState.loading:
@@ -244,7 +278,8 @@ class _ButtonBlockState extends State<ButtonBlock> {
               overlayColor: MicansColors.grey_30,
               borderSideColor: MicansColors.primary_60,
               borderSideWidth: 1.00,
-              borderRadius: size48,
+              buttonBorderRadius:
+                  widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
               fixedSize: size48,
             );
           default:
@@ -255,7 +290,8 @@ class _ButtonBlockState extends State<ButtonBlock> {
               overlayColor: MicansColors.grey_30,
               borderSideColor: MicansColors.primary_70,
               borderSideWidth: 1.00,
-              borderRadius: size48,
+              buttonBorderRadius:
+                  widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
               fixedSize: size48,
             );
         }
@@ -269,7 +305,8 @@ class _ButtonBlockState extends State<ButtonBlock> {
               overlayColor: MicansColors.grey_30,
               borderSideColor: null,
               borderSideWidth: null,
-              borderRadius: size48,
+              buttonBorderRadius:
+                  widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
               fixedSize: size48,
               elevation: 0,
             );
@@ -281,7 +318,8 @@ class _ButtonBlockState extends State<ButtonBlock> {
               overlayColor: MicansColors.grey_30,
               borderSideColor: null,
               borderSideWidth: null,
-              borderRadius: size48,
+              buttonBorderRadius:
+                  widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
               fixedSize: size48,
               elevation: 0,
             );
@@ -293,7 +331,8 @@ class _ButtonBlockState extends State<ButtonBlock> {
               overlayColor: MicansColors.grey_30,
               borderSideColor: null,
               borderSideWidth: null,
-              borderRadius: size48,
+              buttonBorderRadius:
+                  widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
               fixedSize: size48,
             );
         }
@@ -307,7 +346,8 @@ class _ButtonBlockState extends State<ButtonBlock> {
               overlayColor: MicansColors.red_70,
               borderSideColor: null,
               borderSideWidth: null,
-              borderRadius: size48,
+              buttonBorderRadius:
+                  widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
               fixedSize: size48,
             );
           case ButtonState.loading:
@@ -318,7 +358,8 @@ class _ButtonBlockState extends State<ButtonBlock> {
               overlayColor: MicansColors.red_70,
               borderSideColor: null,
               borderSideWidth: null,
-              borderRadius: size48,
+              buttonBorderRadius:
+                  widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
               fixedSize: size48,
             );
           default:
@@ -329,7 +370,8 @@ class _ButtonBlockState extends State<ButtonBlock> {
               overlayColor: MicansColors.red_70,
               borderSideColor: null,
               borderSideWidth: null,
-              borderRadius: size48,
+              buttonBorderRadius:
+                  widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
               fixedSize: size48,
               elevation: 0,
             );
@@ -342,7 +384,8 @@ class _ButtonBlockState extends State<ButtonBlock> {
           overlayColor: MicansColors.grey_30,
           borderSideColor: null,
           borderSideWidth: null,
-          borderRadius: size48,
+          buttonBorderRadius:
+              widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
           fixedSize: size48,
         );
       case ButtonType.skeleton:
@@ -353,7 +396,8 @@ class _ButtonBlockState extends State<ButtonBlock> {
           overlayColor: MicansColors.grey_40,
           borderSideColor: null,
           borderSideWidth: null,
-          borderRadius: size48,
+          buttonBorderRadius:
+              widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
           fixedSize: size48,
         );
     }
@@ -368,7 +412,7 @@ Widget _buttonBlockBuilder({
   required Color overlayColor,
   Color? borderSideColor,
   double? borderSideWidth,
-  required double borderRadius,
+  ButtonBorderRadius? buttonBorderRadius,
   required double fixedSize,
   double elevation = 1.00,
 }) =>
@@ -410,7 +454,7 @@ Widget _buttonBlockBuilder({
         ),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
           RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(borderRadius),
+            borderRadius: BorderRadius.circular(buttonBorderRadius!.value),
           ),
         ),
         padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
