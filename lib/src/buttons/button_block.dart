@@ -422,6 +422,8 @@ Widget _buttonBlockBuilder({
       onPressed: widget.onPressed,
       style: ButtonStyle(
         elevation: MaterialStateProperty.all<double>(elevation),
+        fixedSize:
+            MaterialStateProperty.all<Size>(Size(double.infinity, fixedSize)),
         backgroundColor: MaterialStateProperty.all<Color>(backgroundColor),
         foregroundColor: MaterialStateProperty.all<Color>(foregroundColor),
         side: MaterialStateProperty.all<BorderSide>(
@@ -456,7 +458,6 @@ _buttonContent(ButtonBlock widget) {
   switch (widget.iconPosition) {
     case IconPosition.leading:
       return Wrap(
-        crossAxisAlignment: WrapCrossAlignment.start,
         children: [
           if (widget.icon != null) Icon(widget.icon, size: size24),
           const SizedBox(width: size4),
