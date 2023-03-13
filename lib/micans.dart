@@ -10,3 +10,4 @@ export 'src/buttons/button_block.dart';
 
 // constants
 export 'src/colors/color.dart';
+export 'src/shared/constants.dart';

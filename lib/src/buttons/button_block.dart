@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:micans/micans.dart';
 import 'package:micans/src/buttons/shared.dart';
-import 'package:micans/src/shared/constants.dart';
 
 enum ButtonType {
   primary,
