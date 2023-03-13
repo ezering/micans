@@ -7,6 +7,7 @@ export 'src/spacers/spacer.dart';
 
 // buttons
 export 'src/buttons/button_block.dart';
+export 'src/buttons/shared.dart';
 
 // constants
 export 'src/colors/color.dart';
