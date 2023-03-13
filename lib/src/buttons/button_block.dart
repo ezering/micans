@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:micans/micans.dart';
+import 'package:micans/src/buttons/shared.dart';
+import 'package:micans/src/shared/constants.dart';
 
 enum ButtonType {
   primary,
@@ -11,166 +13,157 @@ enum ButtonType {
   disabled
 }
 
-enum ButtonBorderRadius<double> {
-  none(0.00),
-  sm(size4),
-  md(size8),
-  lg(size12),
-  xl(size16),
-  xxl(size24),
-  xxxl(size32),
-  rounded(size48);
-
-  final double value;
-  const ButtonBorderRadius(this.value);
-}
-
-enum IconSize { sm, md, lg, xl, xxl, xxxl }
-
-enum IconPosition { none, leading, trailing }
-
-enum ButtonState { enabled, loading }
-
 class ButtonBlock extends StatefulWidget {
   final String text;
   final ButtonType buttonType;
   final ButtonBorderRadius<double>? buttonBorderRadius;
-  final ButtonState? buttonState;
+  final ButtonState buttonState;
   final IconPosition iconPosition;
   final IconData? icon;
   final Function()? onPressed;
 
-  // ButtonBlock.primaryEnabled
-  const ButtonBlock.primaryEnabled({
+  const ButtonBlock({
     super.key,
-    this.buttonBorderRadius,
-    required this.text,
+    required this.buttonType,
+    required this.buttonState,
     required this.iconPosition,
     this.icon,
-    this.onPressed,
-  })  : buttonType = ButtonType.primary,
-        buttonState = ButtonState.enabled;
-
-  // ButtonBlock.primaryLoading
-  const ButtonBlock.primaryLoading({
-    super.key,
-    this.buttonBorderRadius,
     required this.text,
-    this.onPressed,
-  })  : buttonType = ButtonType.primary,
-        buttonState = ButtonState.loading,
-        icon = null,
-        iconPosition = IconPosition.none;
-
-  // ButtonBlock.secondaryEnabled
-  const ButtonBlock.secondaryEnabled({
-    super.key,
     this.buttonBorderRadius,
-    required this.text,
-    required this.iconPosition,
-    this.icon,
     this.onPressed,
-  })  : buttonType = ButtonType.secondary,
-        buttonState = ButtonState.enabled;
+  });
 
-  // ButtonBlock.secondaryLoading
-  const ButtonBlock.secondaryLoading({
-    super.key,
-    this.buttonBorderRadius,
-    required this.text,
-    this.onPressed,
-  })  : buttonType = ButtonType.secondary,
-        buttonState = ButtonState.loading,
-        icon = null,
-        iconPosition = IconPosition.none;
+  // // ButtonBlock.primaryEnabled
+  // const ButtonBlock.primaryEnabled({
+  //   super.key,
+  //   this.buttonBorderRadius,
+  //   required this.text,
+  //   required this.iconPosition,
+  //   this.icon,
+  //   this.onPressed,
+  // })  : buttonType = ButtonType.primary,
+  //       buttonState = ButtonState.enabled;
 
-  // ButtonBlock.tertiaryEnabled
-  const ButtonBlock.tertiaryEnabled({
-    super.key,
-    this.buttonBorderRadius,
-    required this.text,
-    required this.iconPosition,
-    this.icon,
-    this.onPressed,
-  })  : buttonType = ButtonType.tertiary,
-        buttonState = ButtonState.enabled;
+  // // ButtonBlock.primaryLoading
+  // const ButtonBlock.primaryLoading({
+  //   super.key,
+  //   this.buttonBorderRadius,
+  //   required this.text,
+  //   this.onPressed,
+  // })  : buttonType = ButtonType.primary,
+  //       buttonState = ButtonState.loading,
+  //       icon = null,
+  //       iconPosition = IconPosition.none;
 
-  // ButtonBlock.tertiaryLoading
-  const ButtonBlock.tertiaryLoading({
-    super.key,
-    this.buttonBorderRadius,
-    required this.text,
-    this.onPressed,
-  })  : buttonType = ButtonType.tertiary,
-        buttonState = ButtonState.loading,
-        icon = null,
-        iconPosition = IconPosition.none;
+  // // ButtonBlock.secondaryEnabled
+  // const ButtonBlock.secondaryEnabled({
+  //   super.key,
+  //   this.buttonBorderRadius,
+  //   required this.text,
+  //   required this.iconPosition,
+  //   this.icon,
+  //   this.onPressed,
+  // })  : buttonType = ButtonType.secondary,
+  //       buttonState = ButtonState.enabled;
 
-  // ButtonBlock.transparentEnabled
-  const ButtonBlock.transparentEnabled({
-    super.key,
-    this.buttonBorderRadius,
-    required this.text,
-    required this.iconPosition,
-    this.icon,
-    this.onPressed,
-  })  : buttonType = ButtonType.transparent,
-        buttonState = ButtonState.enabled;
+  // // ButtonBlock.secondaryLoading
+  // const ButtonBlock.secondaryLoading({
+  //   super.key,
+  //   this.buttonBorderRadius,
+  //   required this.text,
+  //   this.onPressed,
+  // })  : buttonType = ButtonType.secondary,
+  //       buttonState = ButtonState.loading,
+  //       icon = null,
+  //       iconPosition = IconPosition.none;
 
-  // ButtonBlock.transparentLoading
-  const ButtonBlock.transparentLoading({
-    super.key,
-    this.buttonBorderRadius,
-    required this.text,
-    this.onPressed,
-  })  : buttonType = ButtonType.transparent,
-        buttonState = ButtonState.loading,
-        icon = null,
-        iconPosition = IconPosition.none;
+  // // ButtonBlock.tertiaryEnabled
+  // const ButtonBlock.tertiaryEnabled({
+  //   super.key,
+  //   this.buttonBorderRadius,
+  //   required this.text,
+  //   required this.iconPosition,
+  //   this.icon,
+  //   this.onPressed,
+  // })  : buttonType = ButtonType.tertiary,
+  //       buttonState = ButtonState.enabled;
 
-  // ButtonBlock.dangerEnabled
-  const ButtonBlock.dangerEnabled({
-    super.key,
-    this.buttonBorderRadius,
-    required this.text,
-    required this.iconPosition,
-    this.icon,
-    this.onPressed,
-  })  : buttonType = ButtonType.danger,
-        buttonState = ButtonState.enabled;
+  // // ButtonBlock.tertiaryLoading
+  // const ButtonBlock.tertiaryLoading({
+  //   super.key,
+  //   this.buttonBorderRadius,
+  //   required this.text,
+  //   this.onPressed,
+  // })  : buttonType = ButtonType.tertiary,
+  //       buttonState = ButtonState.loading,
+  //       icon = null,
+  //       iconPosition = IconPosition.none;
 
-  // ButtonBlock.dangerLoading
-  const ButtonBlock.dangerLoading({
-    super.key,
-    this.buttonBorderRadius,
-    required this.text,
-    this.onPressed,
-  })  : buttonType = ButtonType.danger,
-        buttonState = ButtonState.loading,
-        icon = null,
-        iconPosition = IconPosition.none;
+  // // ButtonBlock.transparentEnabled
+  // const ButtonBlock.transparentEnabled({
+  //   super.key,
+  //   this.buttonBorderRadius,
+  //   required this.text,
+  //   required this.iconPosition,
+  //   this.icon,
+  //   this.onPressed,
+  // })  : buttonType = ButtonType.transparent,
+  //       buttonState = ButtonState.enabled;
 
-  // ButtonBlock.skeleton
-  const ButtonBlock.skeleton({
-    super.key,
-    this.buttonBorderRadius,
-    required this.text,
-    required this.iconPosition,
-    this.icon,
-    this.onPressed,
-    this.buttonState,
-  }) : buttonType = ButtonType.skeleton;
+  // // ButtonBlock.transparentLoading
+  // const ButtonBlock.transparentLoading({
+  //   super.key,
+  //   this.buttonBorderRadius,
+  //   required this.text,
+  //   this.onPressed,
+  // })  : buttonType = ButtonType.transparent,
+  //       buttonState = ButtonState.loading,
+  //       icon = null,
+  //       iconPosition = IconPosition.none;
 
-  // ButtonBlock.Disabled
-  const ButtonBlock.disabled({
-    super.key,
-    this.buttonBorderRadius,
-    required this.text,
-    required this.iconPosition,
-    this.icon,
-    this.onPressed,
-    this.buttonState,
-  }) : buttonType = ButtonType.disabled;
+  // // ButtonBlock.dangerEnabled
+  // const ButtonBlock.dangerEnabled({
+  //   super.key,
+  //   this.buttonBorderRadius,
+  //   required this.text,
+  //   required this.iconPosition,
+  //   this.icon,
+  //   this.onPressed,
+  // })  : buttonType = ButtonType.danger,
+  //       buttonState = ButtonState.enabled;
+
+  // // ButtonBlock.dangerLoading
+  // const ButtonBlock.dangerLoading({
+  //   super.key,
+  //   this.buttonBorderRadius,
+  //   required this.text,
+  //   this.onPressed,
+  // })  : buttonType = ButtonType.danger,
+  //       buttonState = ButtonState.loading,
+  //       icon = null,
+  //       iconPosition = IconPosition.none;
+
+  // // ButtonBlock.skeleton
+  // const ButtonBlock.skeleton({
+  //   super.key,
+  //   this.buttonBorderRadius,
+  //   required this.text,
+  //   required this.iconPosition,
+  //   this.icon,
+  //   this.onPressed,
+  //   required this.buttonState,
+  // }) : buttonType = ButtonType.skeleton;
+
+  // // ButtonBlock.Disabled
+  // const ButtonBlock.disabled({
+  //   super.key,
+  //   this.buttonBorderRadius,
+  //   required this.text,
+  //   required this.iconPosition,
+  //   this.icon,
+  //   this.onPressed,
+  //   required this.buttonState,
+  // }) : buttonType = ButtonType.disabled;
 
   @override
   State<ButtonBlock> createState() => _ButtonBlockState();
@@ -179,230 +172,7 @@ class ButtonBlock extends StatefulWidget {
 class _ButtonBlockState extends State<ButtonBlock> {
   @override
   Widget build(BuildContext context) {
-    switch (widget.buttonType) {
-      case ButtonType.primary:
-        switch (widget.buttonState) {
-          case ButtonState.enabled:
-            return _buttonBlockBuilder(
-              widget: widget,
-              backgroundColor: MicansColors.primary_60,
-              foregroundColor: MicansColors.grey_10,
-              overlayColor: MicansColors.primary_80,
-              borderSideColor: null,
-              borderSideWidth: null,
-              buttonBorderRadius:
-                  widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
-              fixedSize: size48,
-            );
-          case ButtonState.loading:
-            return _buttonBlockBuilder(
-              widget: widget,
-              backgroundColor: MicansColors.primary_20,
-              foregroundColor: MicansColors.grey_70,
-              overlayColor: MicansColors.primary_30,
-              borderSideColor: null,
-              borderSideWidth: null,
-              buttonBorderRadius:
-                  widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
-              fixedSize: size48,
-            );
-          default:
-            return _buttonBlockBuilder(
-              widget: widget,
-              backgroundColor: MicansColors.primary_60,
-              foregroundColor: MicansColors.grey_10,
-              overlayColor: MicansColors.primary_80,
-              borderSideColor: null,
-              borderSideWidth: null,
-              buttonBorderRadius:
-                  widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
-              fixedSize: size48,
-            );
-        }
-      case ButtonType.secondary:
-        switch (widget.buttonState) {
-          case ButtonState.enabled:
-            return _buttonBlockBuilder(
-              widget: widget,
-              backgroundColor: MicansColors.grey_20,
-              foregroundColor: MicansColors.grey_100,
-              overlayColor: MicansColors.primary_40,
-              borderSideColor: null,
-              borderSideWidth: null,
-              buttonBorderRadius:
-                  widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
-              fixedSize: size48,
-            );
-          case ButtonState.loading:
-            return _buttonBlockBuilder(
-              widget: widget,
-              backgroundColor: MicansColors.grey_20,
-              foregroundColor: MicansColors.grey_60,
-              overlayColor: MicansColors.grey_60,
-              borderSideColor: null,
-              borderSideWidth: null,
-              buttonBorderRadius:
-                  widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
-              fixedSize: size48,
-            );
-          default:
-            return _buttonBlockBuilder(
-              widget: widget,
-              backgroundColor: MicansColors.grey_20,
-              foregroundColor: MicansColors.grey_100,
-              overlayColor: MicansColors.primary_40,
-              borderSideColor: null,
-              borderSideWidth: null,
-              buttonBorderRadius:
-                  widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
-              fixedSize: size48,
-            );
-        }
-      case ButtonType.tertiary:
-        switch (widget.buttonState) {
-          case ButtonState.enabled:
-            return _buttonBlockBuilder(
-              widget: widget,
-              backgroundColor: MicansColors.white,
-              foregroundColor: MicansColors.primary_70,
-              overlayColor: MicansColors.grey_30,
-              borderSideColor: MicansColors.primary_70,
-              borderSideWidth: 1.00,
-              buttonBorderRadius:
-                  widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
-              fixedSize: size48,
-            );
-          case ButtonState.loading:
-            return _buttonBlockBuilder(
-              widget: widget,
-              backgroundColor: MicansColors.white,
-              foregroundColor: MicansColors.primary_70,
-              overlayColor: MicansColors.grey_30,
-              borderSideColor: MicansColors.primary_60,
-              borderSideWidth: 1.00,
-              buttonBorderRadius:
-                  widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
-              fixedSize: size48,
-            );
-          default:
-            return _buttonBlockBuilder(
-              widget: widget,
-              backgroundColor: MicansColors.white,
-              foregroundColor: MicansColors.primary_70,
-              overlayColor: MicansColors.grey_30,
-              borderSideColor: MicansColors.primary_70,
-              borderSideWidth: 1.00,
-              buttonBorderRadius:
-                  widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
-              fixedSize: size48,
-            );
-        }
-      case ButtonType.transparent:
-        switch (widget.buttonState) {
-          case ButtonState.enabled:
-            return _buttonBlockBuilder(
-              widget: widget,
-              backgroundColor: MicansColors.white,
-              foregroundColor: MicansColors.primary_70,
-              overlayColor: MicansColors.grey_30,
-              borderSideColor: null,
-              borderSideWidth: null,
-              buttonBorderRadius:
-                  widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
-              fixedSize: size48,
-              elevation: 0,
-            );
-          case ButtonState.loading:
-            return _buttonBlockBuilder(
-              widget: widget,
-              backgroundColor: MicansColors.white,
-              foregroundColor: MicansColors.primary_60,
-              overlayColor: MicansColors.grey_30,
-              borderSideColor: null,
-              borderSideWidth: null,
-              buttonBorderRadius:
-                  widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
-              fixedSize: size48,
-              elevation: 0,
-            );
-          default:
-            return _buttonBlockBuilder(
-              widget: widget,
-              backgroundColor: MicansColors.white,
-              foregroundColor: MicansColors.primary_70,
-              overlayColor: MicansColors.grey_30,
-              borderSideColor: null,
-              borderSideWidth: null,
-              buttonBorderRadius:
-                  widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
-              fixedSize: size48,
-            );
-        }
-      case ButtonType.danger:
-        switch (widget.buttonState) {
-          case ButtonState.enabled:
-            return _buttonBlockBuilder(
-              widget: widget,
-              backgroundColor: MicansColors.red_50,
-              foregroundColor: MicansColors.white,
-              overlayColor: MicansColors.red_70,
-              borderSideColor: null,
-              borderSideWidth: null,
-              buttonBorderRadius:
-                  widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
-              fixedSize: size48,
-            );
-          case ButtonState.loading:
-            return _buttonBlockBuilder(
-              widget: widget,
-              backgroundColor: MicansColors.red_70,
-              foregroundColor: MicansColors.white,
-              overlayColor: MicansColors.red_70,
-              borderSideColor: null,
-              borderSideWidth: null,
-              buttonBorderRadius:
-                  widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
-              fixedSize: size48,
-            );
-          default:
-            return _buttonBlockBuilder(
-              widget: widget,
-              backgroundColor: MicansColors.red_50,
-              foregroundColor: MicansColors.white,
-              overlayColor: MicansColors.red_70,
-              borderSideColor: null,
-              borderSideWidth: null,
-              buttonBorderRadius:
-                  widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
-              fixedSize: size48,
-              elevation: 0,
-            );
-        }
-      case ButtonType.disabled:
-        return _buttonBlockBuilder(
-          widget: widget,
-          backgroundColor: MicansColors.grey_30,
-          foregroundColor: MicansColors.grey_50,
-          overlayColor: MicansColors.grey_30,
-          borderSideColor: null,
-          borderSideWidth: null,
-          buttonBorderRadius:
-              widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
-          fixedSize: size48,
-        );
-      case ButtonType.skeleton:
-        return _buttonBlockBuilder(
-          widget: widget,
-          backgroundColor: MicansColors.grey_30,
-          foregroundColor: MicansColors.grey_50,
-          overlayColor: MicansColors.grey_40,
-          borderSideColor: null,
-          borderSideWidth: null,
-          buttonBorderRadius:
-              widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
-          fixedSize: size48,
-        );
-    }
+    return _switcherWidget(widget.buttonType, widget.buttonState, widget);
   }
 }
 
@@ -515,3 +285,406 @@ _textButtonContent(ButtonBlock widget) {
     ),
   );
 }
+
+Widget _switcherWidget(
+    ButtonType buttonType, ButtonState buttonState, ButtonBlock widget) {
+  // map of button types
+  final Map<ButtonType, Map<ButtonState, Widget Function()>> buttonBlockMap = {
+    ButtonType.primary: {
+      ButtonState.enabled: () => _buttonBlockBuilder(
+            widget: widget,
+            backgroundColor: MicansColors.primary_50,
+            foregroundColor: MicansColors.white,
+            overlayColor: MicansColors.primary_70,
+            borderSideColor: null,
+            borderSideWidth: null,
+            buttonBorderRadius:
+                widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
+            fixedSize: size48,
+          ),
+      ButtonState.loading: () => _buttonBlockBuilder(
+            widget: widget,
+            backgroundColor: MicansColors.primary_70,
+            foregroundColor: MicansColors.white,
+            overlayColor: MicansColors.primary_70,
+            borderSideColor: null,
+            borderSideWidth: null,
+            buttonBorderRadius:
+                widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
+            fixedSize: size48,
+          ),
+    },
+    ButtonType.secondary: {
+      ButtonState.enabled: () => _buttonBlockBuilder(
+            widget: widget,
+            backgroundColor: MicansColors.white,
+            foregroundColor: MicansColors.primary_70,
+            overlayColor: MicansColors.grey_30,
+            borderSideColor: MicansColors.primary_50,
+            borderSideWidth: 1,
+            buttonBorderRadius:
+                widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
+            fixedSize: size48,
+          ),
+      ButtonState.loading: () => _buttonBlockBuilder(
+            widget: widget,
+            backgroundColor: MicansColors.white,
+            foregroundColor: MicansColors.primary_70,
+            overlayColor: MicansColors.grey_30,
+            borderSideColor: MicansColors.primary_50,
+            borderSideWidth: 1,
+            buttonBorderRadius:
+                widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
+            fixedSize: size48,
+          ),
+    },
+    ButtonType.tertiary: {
+      ButtonState.enabled: () => _buttonBlockBuilder(
+            widget: widget,
+            backgroundColor: MicansColors.white,
+            foregroundColor: MicansColors.grey_70,
+            overlayColor: MicansColors.grey_30,
+            borderSideColor: null,
+            borderSideWidth: null,
+            buttonBorderRadius:
+                widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
+            fixedSize: size48,
+          ),
+      ButtonState.loading: () => _buttonBlockBuilder(
+            widget: widget,
+            backgroundColor: MicansColors.white,
+            foregroundColor: MicansColors.grey_70,
+            overlayColor: MicansColors.grey_30,
+            borderSideColor: null,
+            borderSideWidth: null,
+            buttonBorderRadius:
+                widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
+            fixedSize: size48,
+          ),
+    },
+    ButtonType.transparent: {
+      ButtonState.enabled: () => _buttonBlockBuilder(
+            widget: widget,
+            backgroundColor: MicansColors.white,
+            foregroundColor: MicansColors.primary_70,
+            overlayColor: MicansColors.grey_30,
+            borderSideColor: null,
+            borderSideWidth: null,
+            buttonBorderRadius:
+                widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
+            fixedSize: size48,
+          ),
+      ButtonState.loading: () => _buttonBlockBuilder(
+            widget: widget,
+            backgroundColor: MicansColors.white,
+            foregroundColor: MicansColors.primary_70,
+            overlayColor: MicansColors.grey_30,
+            borderSideColor: null,
+            borderSideWidth: null,
+            buttonBorderRadius:
+                widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
+            fixedSize: size48,
+          ),
+    },
+    ButtonType.danger: {
+      ButtonState.enabled: () => _buttonBlockBuilder(
+            widget: widget,
+            backgroundColor: MicansColors.red_50,
+            foregroundColor: MicansColors.white,
+            overlayColor: MicansColors.red_70,
+            borderSideColor: null,
+            borderSideWidth: null,
+            buttonBorderRadius:
+                widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
+            fixedSize: size48,
+          ),
+      ButtonState.loading: () => _buttonBlockBuilder(
+            widget: widget,
+            backgroundColor: MicansColors.red_70,
+            foregroundColor: MicansColors.white,
+            overlayColor: MicansColors.red_70,
+            borderSideColor: null,
+            borderSideWidth: null,
+            buttonBorderRadius:
+                widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
+            fixedSize: size48,
+          ),
+    },
+    ButtonType.disabled: {
+      ButtonState.enabled: () => _buttonBlockBuilder(
+            widget: widget,
+            backgroundColor: MicansColors.grey_30,
+            foregroundColor: MicansColors.grey_50,
+            overlayColor: MicansColors.grey_30,
+            borderSideColor: null,
+            borderSideWidth: null,
+            buttonBorderRadius:
+                widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
+            fixedSize: size48,
+          ),
+      ButtonState.loading: () => _buttonBlockBuilder(
+            widget: widget,
+            backgroundColor: MicansColors.grey_30,
+            foregroundColor: MicansColors.grey_50,
+            overlayColor: MicansColors.grey_30,
+            borderSideColor: null,
+            borderSideWidth: null,
+            buttonBorderRadius:
+                widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
+            fixedSize: size48,
+          ),
+    },
+    ButtonType.skeleton: {
+      ButtonState.enabled: () => _buttonBlockBuilder(
+            widget: widget,
+            backgroundColor: MicansColors.grey_30,
+            foregroundColor: MicansColors.grey_50,
+            overlayColor: MicansColors.grey_30,
+            borderSideColor: null,
+            borderSideWidth: null,
+            buttonBorderRadius:
+                widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
+            fixedSize: size48,
+          ),
+      ButtonState.loading: () => _buttonBlockBuilder(
+            widget: widget,
+            backgroundColor: MicansColors.grey_30,
+            foregroundColor: MicansColors.grey_50,
+            overlayColor: MicansColors.grey_30,
+            borderSideColor: null,
+            borderSideWidth: null,
+            buttonBorderRadius:
+                widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
+            fixedSize: size48,
+          ),
+    },
+  };
+
+  return buttonBlockMap[widget.buttonType]![widget.buttonState]!();
+}
+
+
+// switch (widget.buttonType) {
+//       case ButtonType.primary:
+//         switch (widget.buttonState) {
+//           case ButtonState.enabled:
+//             return _buttonBlockBuilder(
+//               widget: widget,
+//               backgroundColor: MicansColors.primary_60,
+//               foregroundColor: MicansColors.grey_10,
+//               overlayColor: MicansColors.primary_80,
+//               borderSideColor: null,
+//               borderSideWidth: null,
+//               buttonBorderRadius:
+//                   widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
+//               fixedSize: size48,
+//             );
+//           case ButtonState.loading:
+//             return _buttonBlockBuilder(
+//               widget: widget,
+//               backgroundColor: MicansColors.primary_20,
+//               foregroundColor: MicansColors.grey_70,
+//               overlayColor: MicansColors.primary_30,
+//               borderSideColor: null,
+//               borderSideWidth: null,
+//               buttonBorderRadius:
+//                   widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
+//               fixedSize: size48,
+//             );
+//           default:
+//             return _buttonBlockBuilder(
+//               widget: widget,
+//               backgroundColor: MicansColors.primary_60,
+//               foregroundColor: MicansColors.grey_10,
+//               overlayColor: MicansColors.primary_80,
+//               borderSideColor: null,
+//               borderSideWidth: null,
+//               buttonBorderRadius:
+//                   widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
+//               fixedSize: size48,
+//             );
+//         }
+//       case ButtonType.secondary:
+//         switch (widget.buttonState) {
+//           case ButtonState.enabled:
+//             return _buttonBlockBuilder(
+//               widget: widget,
+//               backgroundColor: MicansColors.grey_20,
+//               foregroundColor: MicansColors.grey_100,
+//               overlayColor: MicansColors.primary_40,
+//               borderSideColor: null,
+//               borderSideWidth: null,
+//               buttonBorderRadius:
+//                   widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
+//               fixedSize: size48,
+//             );
+//           case ButtonState.loading:
+//             return _buttonBlockBuilder(
+//               widget: widget,
+//               backgroundColor: MicansColors.grey_20,
+//               foregroundColor: MicansColors.grey_60,
+//               overlayColor: MicansColors.grey_60,
+//               borderSideColor: null,
+//               borderSideWidth: null,
+//               buttonBorderRadius:
+//                   widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
+//               fixedSize: size48,
+//             );
+//           default:
+//             return _buttonBlockBuilder(
+//               widget: widget,
+//               backgroundColor: MicansColors.grey_20,
+//               foregroundColor: MicansColors.grey_100,
+//               overlayColor: MicansColors.primary_40,
+//               borderSideColor: null,
+//               borderSideWidth: null,
+//               buttonBorderRadius:
+//                   widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
+//               fixedSize: size48,
+//             );
+//         }
+//       case ButtonType.tertiary:
+//         switch (widget.buttonState) {
+//           case ButtonState.enabled:
+//             return _buttonBlockBuilder(
+//               widget: widget,
+//               backgroundColor: MicansColors.white,
+//               foregroundColor: MicansColors.primary_70,
+//               overlayColor: MicansColors.grey_30,
+//               borderSideColor: MicansColors.primary_70,
+//               borderSideWidth: 1.00,
+//               buttonBorderRadius:
+//                   widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
+//               fixedSize: size48,
+//             );
+//           case ButtonState.loading:
+//             return _buttonBlockBuilder(
+//               widget: widget,
+//               backgroundColor: MicansColors.white,
+//               foregroundColor: MicansColors.primary_70,
+//               overlayColor: MicansColors.grey_30,
+//               borderSideColor: MicansColors.primary_60,
+//               borderSideWidth: 1.00,
+//               buttonBorderRadius:
+//                   widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
+//               fixedSize: size48,
+//             );
+//           default:
+//             return _buttonBlockBuilder(
+//               widget: widget,
+//               backgroundColor: MicansColors.white,
+//               foregroundColor: MicansColors.primary_70,
+//               overlayColor: MicansColors.grey_30,
+//               borderSideColor: MicansColors.primary_70,
+//               borderSideWidth: 1.00,
+//               buttonBorderRadius:
+//                   widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
+//               fixedSize: size48,
+//             );
+//         }
+//       case ButtonType.transparent:
+//         switch (widget.buttonState) {
+//           case ButtonState.enabled:
+//             return _buttonBlockBuilder(
+//               widget: widget,
+//               backgroundColor: MicansColors.white,
+//               foregroundColor: MicansColors.primary_70,
+//               overlayColor: MicansColors.grey_30,
+//               borderSideColor: null,
+//               borderSideWidth: null,
+//               buttonBorderRadius:
+//                   widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
+//               fixedSize: size48,
+//               elevation: 0,
+//             );
+//           case ButtonState.loading:
+//             return _buttonBlockBuilder(
+//               widget: widget,
+//               backgroundColor: MicansColors.white,
+//               foregroundColor: MicansColors.primary_60,
+//               overlayColor: MicansColors.grey_30,
+//               borderSideColor: null,
+//               borderSideWidth: null,
+//               buttonBorderRadius:
+//                   widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
+//               fixedSize: size48,
+//               elevation: 0,
+//             );
+//           default:
+//             return _buttonBlockBuilder(
+//               widget: widget,
+//               backgroundColor: MicansColors.white,
+//               foregroundColor: MicansColors.primary_70,
+//               overlayColor: MicansColors.grey_30,
+//               borderSideColor: null,
+//               borderSideWidth: null,
+//               buttonBorderRadius:
+//                   widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
+//               fixedSize: size48,
+//             );
+//         }
+//       case ButtonType.danger:
+//         switch (widget.buttonState) {
+//           case ButtonState.enabled:
+//             return _buttonBlockBuilder(
+//               widget: widget,
+//               backgroundColor: MicansColors.red_50,
+//               foregroundColor: MicansColors.white,
+//               overlayColor: MicansColors.red_70,
+//               borderSideColor: null,
+//               borderSideWidth: null,
+//               buttonBorderRadius:
+//                   widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
+//               fixedSize: size48,
+//             );
+//           case ButtonState.loading:
+//             return _buttonBlockBuilder(
+//               widget: widget,
+//               backgroundColor: MicansColors.red_70,
+//               foregroundColor: MicansColors.white,
+//               overlayColor: MicansColors.red_70,
+//               borderSideColor: null,
+//               borderSideWidth: null,
+//               buttonBorderRadius:
+//                   widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
+//               fixedSize: size48,
+//             );
+//           default:
+//             return _buttonBlockBuilder(
+//               widget: widget,
+//               backgroundColor: MicansColors.red_50,
+//               foregroundColor: MicansColors.white,
+//               overlayColor: MicansColors.red_70,
+//               borderSideColor: null,
+//               borderSideWidth: null,
+//               buttonBorderRadius:
+//                   widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
+//               fixedSize: size48,
+//               elevation: 0,
+//             );
+//         }
+//       case ButtonType.disabled:
+//         return _buttonBlockBuilder(
+//           widget: widget,
+//           backgroundColor: MicansColors.grey_30,
+//           foregroundColor: MicansColors.grey_50,
+//           overlayColor: MicansColors.grey_30,
+//           borderSideColor: null,
+//           borderSideWidth: null,
+//           buttonBorderRadius:
+//               widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
+//           fixedSize: size48,
+//         );
+//       case ButtonType.skeleton:
+//         return _buttonBlockBuilder(
+//           widget: widget,
+//           backgroundColor: MicansColors.grey_30,
+//           foregroundColor: MicansColors.grey_50,
+//           overlayColor: MicansColors.grey_40,
+//           borderSideColor: null,
+//           borderSideWidth: null,
+//           buttonBorderRadius:
+//               widget.buttonBorderRadius ?? ButtonBorderRadius.rounded,
+//           fixedSize: size48,
+//         );
+//     }

@@ -1,18 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:micans/src/shared/constants.dart';
 
-const double size4 = 4;
-const double size8 = 8;
-const double size12 = 12;
-const double size16 = 16;
-const double size24 = 24;
-const double size32 = 32;
-const double size40 = 40;
-const double size48 = 48;
-const double size56 = 56;
-const double size64 = 64;
-const double size72 = 72;
-const double size80 = 80;
 
+
+// Fix this:: this spacing has a problem with the width set to double.infinity
+// Fix this:: Maybe I should check the naming when I need just the height or width
 class MicansSpacer extends StatelessWidget {
   final double size;
 

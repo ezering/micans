@@ -1,0 +1,12 @@
+const double size4 = 4;
+const double size8 = 8;
+const double size12 = 12;
+const double size16 = 16;
+const double size24 = 24;
+const double size32 = 32;
+const double size40 = 40;
+const double size48 = 48;
+const double size56 = 56;
+const double size64 = 64;
+const double size72 = 72;
+const double size80 = 80;
